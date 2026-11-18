@@ -1,0 +1,31 @@
+{
+  "name": "vernatun",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "articles:new": "node scripts/articles/cli.mjs new",
+    "articles:validate": "node scripts/articles/cli.mjs validate",
+    "articles:list": "node scripts/articles/cli.mjs list",
+    "articles:publish": "node scripts/articles/cli.mjs publish",
+    "articles:build": "node scripts/articles/build.mjs",
+    "articles:preview": "node scripts/articles/build.mjs --preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nighttech1/Vernatun-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Nighttech1/Vernatun-site/issues"
+  },
+  "homepage": "https://github.com/Nighttech1/Vernatun-site#readme"
+}

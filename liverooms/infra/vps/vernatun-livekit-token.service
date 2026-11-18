@@ -1,0 +1,13 @@
+[Unit]
+Description=Vernatun LiveKit token server (test-room)
+After=network.target
+
+[Service]
+Type=simple
+User=infinity
+ExecStart=/home/infinity/run-vernatun-token.sh
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

@@ -15,10 +15,13 @@ description: >-
 ## Skill-first
 
 1. Этот файл + [materials.md](materials.md)
-2. Motion: `.cursor/skills/web-motion-engine/SKILL.md` + `emil-animate` / `review-animations`
-3. 3D только если спека: `.cursor/skills/three-webgl-craft/SKILL.md`
-4. Анти-slop: `taste-skill` (запреты), генерация направления: `ui-ux-pro-max --design-system` **не** перебивает токены
-5. `/audit`: `design-token-guardian` + `plugins/frontend/anti_slop_scan.py`
+2. **Адаптив:** `.cursor/skills/responsive-mobile-web/SKILL.md`
+3. **Палец/скролл:** `.cursor/skills/mobile-touch-scroll/SKILL.md`
+4. Motion: `.cursor/skills/web-motion-engine/SKILL.md` + `emil-animate` / `review-animations`
+5. 3D только если спека: `.cursor/skills/three-webgl-craft/SKILL.md`
+6. Анти-slop: `taste-skill` (запреты), генерация направления: `ui-ux-pro-max --design-system` **не** перебивает токены
+7. `/audit`: `design-token-guardian` + `plugins/frontend/anti_slop_scan.py`
+8. Самопроверка MCP: `playwright-iphone` + `playwright-android` перед сдачей
 
 ## Барьер цены
 

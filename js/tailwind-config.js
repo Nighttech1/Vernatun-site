@@ -10,8 +10,8 @@ tailwind.config = {
         mist: '#e8e2d8',
       },
       fontFamily: {
-        display: ['"Libre Caslon Text"', 'Georgia', 'serif'],
-        sans: ['"Be Vietnam Pro"', 'system-ui', 'sans-serif'],
+        display: ['"Century Gothic"', 'CenturyGothic', 'sans-serif'],
+        sans: ['"Century Gothic"', 'CenturyGothic', 'sans-serif'],
       },
       boxShadow: {
         card: '0 1px 0 rgba(42,90,132,0.06), 0 12px 40px -16px rgba(30,41,48,0.12)',

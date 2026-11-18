@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Культ идеальной жизни — учебные материалы · Vernatun</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -21,18 +18,32 @@
             mist: '#e8e2d8',
           },
           fontFamily: {
-            display: ['"Libre Caslon Text"', 'Georgia', 'serif'],
-            sans: ['"Be Vietnam Pro"', 'system-ui', 'sans-serif'],
+            display: ['"Century Gothic"', 'CenturyGothic', 'sans-serif'],
+            sans: ['"Century Gothic"', 'CenturyGothic', 'sans-serif'],
           },
         }
       }
     }
   </script>
+  <link rel="preload" href="/fonts/CenturyGothic.ttf?v=20260920a" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="/fonts/CenturyGothic-Bold.ttf?v=20260920a" as="font" type="font/ttf" crossorigin />
   <style>
+    @font-face {
+      font-family: "Century Gothic";
+      src: url("/fonts/CenturyGothic.ttf?v=20260920a") format("truetype");
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Century Gothic";
+      src: url("/fonts/CenturyGothic-Bold.ttf?v=20260920a") format("truetype");
+      font-weight: 700;
+      font-display: swap;
+    }
     body {
       background-color: #F9F6F0;
       color: #1e2930;
-      font-family: "Be Vietnam Pro", system-ui, sans-serif;
+      font-family: "Century Gothic", CenturyGothic, sans-serif;
     }
     .paper-grain {
       background-image:
@@ -86,7 +97,12 @@
         <p class="mt-2 max-w-2xl text-sm leading-relaxed text-ink/70">Текст для разбора темы «Культ идеальной жизни и иллюзия соцсетей» (уровень A1–B1).</p>
       </div>
       <div class="overflow-hidden rounded-xl border border-azure/15 bg-white shadow-sm">
-        <iframe class="pdf-frame" src="handout.pdf#view=FitH" title="PDF: Культ идеальной жизни A1–B1"></iframe>
+        <!-- Mobile: Chromium/WebKit often blank iframe PDFs — card CTA instead -->
+        <div class="pdf-mobile-card flex flex-col items-start gap-4 p-5 sm:p-6 md:hidden">
+          <p class="text-sm leading-relaxed text-ink/75">На телефоне PDF удобнее открыть в приложении просмотра — так текст и масштаб работают стабильно.</p>
+          <a class="inline-flex min-h-11 items-center justify-center rounded-full bg-azure px-5 py-2.5 text-sm font-bold text-white transition hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-sungold" href="handout.pdf" target="_blank" rel="noopener noreferrer">Открыть PDF</a>
+        </div>
+        <iframe class="pdf-frame hidden md:block" src="handout.pdf#view=FitH" title="PDF: Культ идеальной жизни A1–B1"></iframe>
       </div>
       <p class="mt-3 text-center text-xs text-ink/55">
         <a class="font-semibold text-azure underline decoration-sungold/60 underline-offset-2 hover:text-terracotta" href="handout.pdf" target="_blank" rel="noopener noreferrer">Открыть PDF в новой вкладке</a>
@@ -122,7 +138,7 @@
               </div>
               <div class="flex items-center gap-2 rounded-lg border border-terracotta/20 bg-parchment/80 px-2.5 py-1.5">
                 <span class="h-2.5 w-2.5 rounded-full bg-terracotta"></span>
-                <span class="text-ink/75">Խոսնակ 2 (Ани)</span>
+                <span class="text-ink/75">ФЅХёХЅХ¶ХЎХЇ 2 (РђРЅРё)</span>
               </div>
             </div>
           </div>
@@ -490,7 +506,7 @@
           <div class="flex items-center justify-between gap-3 mb-2 pb-1 border-b border-mist text-[11px]">
             <div class="flex items-center gap-2 font-semibold">
               <span class="px-2 py-0.5 rounded-full text-white text-[10px] ${isSpeaker1 ? 'bg-azure' : 'bg-terracotta'}">
-                ${isSpeaker1 ? 'Խոսնակ 1' : 'Խոսնակ 2'}
+                ${isSpeaker1 ? 'ФЅХёХЅХ¶ХЎХЇ 1' : 'ФЅХёХЅХ¶ХЎХЇ 2'}
               </span>
               <span class="text-ink/50 font-normal">${isSpeaker1 ? 'Тигран' : 'Ани'}</span>
             </div>

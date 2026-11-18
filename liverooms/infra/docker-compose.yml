@@ -1,0 +1,67 @@
+# LiveKit + coturn — Vernatun Lounge local (фаза 1)
+# Multi-party: several publishers speak at once.
+# Dev keys (--dev): API key `devkey`, secret `secret`.
+# Metrics: docker compose --profile metrics up -d
+
+services:
+  livekit:
+    image: livekit/livekit-server:v1.13.4
+    command: --dev --bind 0.0.0.0 --config /etc/livekit.yaml
+    restart: unless-stopped
+    ports:
+      - "7880:7880"
+      - "7881:7881"
+      - "7882:7882/udp"
+      # Narrow range avoids Windows port collisions on large maps
+      - "51000-51020:51000-51020/udp"
+      - "6789:6789"
+    volumes:
+      - ./livekit.yaml:/etc/livekit.yaml:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  coturn:
+    image: coturn/coturn:4.6.2-alpine
+    restart: unless-stopped
+    ports:
+      - "3478:3478"
+      - "3478:3478/udp"
+      - "49160-49180:49160-49180/udp"
+    volumes:
+      - ./turnserver.conf:/etc/coturn/turnserver.conf:ro
+    command:
+      - "-c"
+      - "/etc/coturn/turnserver.conf"
+
+  prometheus:
+    profiles: ["metrics"]
+    image: prom/prometheus:v2.54.1
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.enable-lifecycle"
+    depends_on:
+      - livekit
+
+  grafana:
+    profiles: ["metrics"]
+    image: grafana/grafana:11.2.0
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_AUTH_ANONYMOUS_ENABLED: "false"
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_SERVER_ROOT_URL: http://127.0.0.1:3000
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+<html lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vernatun Campus — Каталог голосовых комнат</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts for Swiss/Modern Editorial feel -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              terracotta: '#C25E28',
+              'terracotta-dark': '#A34B1C',
+              amber: '#E5A93C',
+              navy: '#1E293B',
+              slate: '#0F172A',
+              cream: '#FDFBF7',
+              surface: '#F8F9FA'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-animations">
+    @keyframes pulse-live {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.18); }
+    }
+    .animate-live-dot {
+      animation: pulse-live 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes audio-wave {
+      0%, 100% { height: 4px; }
+      50% { height: 16px; }
+    }
+    .wave-bar-1 { animation: audio-wave 1s ease-in-out infinite; }
+    .wave-bar-2 { animation: audio-wave 1.2s ease-in-out infinite 0.2s; }
+    .wave-bar-3 { animation: audio-wave 0.8s ease-in-out infinite 0.4s; }
+    .wave-bar-4 { animation: audio-wave 1.1s ease-in-out infinite 0.1s; }
+  </style>
+</head>
+<body class="bg-[#F8F9FA] text-slate-900 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-terracotta selection:text-white">
+<!-- BEGIN: MainHeader -->
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3 flex items-center justify-between">
+<!-- Logo and Campus Title -->
+<div class="flex items-center space-x-6">
+<a class="flex items-center space-x-3 group" href="#">
+<img alt="Vernatun Armenian Club Emblem" class="w-10 h-10 rounded-full border border-amber-300 shadow-sm transition-transform group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1XshGhFj7l0sfzH28vBVYMSfQgAAzR_t1DorLJVIY4JhElq4cwPg7q08v6DH1pLxaG3zzGLL7ymvrd74GfHFvaUSb4KhqkqaEVlzmZdJIbVntdVTLm2xiyw2RQK_uLVuMxtnfBNez6Fig4CBMpVcBNRAGHd8YrUhU18lr_1DurdImH8q2-a2AERs61KOPyuRjgTCRTddXCUZWzH9vZEMKmk3JIVwtUrV549WN7m52aP3K2v46QZYyYOMr6kvhpIcc_mAjJikbr4rw"/>
+<div class="leading-none">
+<span class="block font-mono text-xs uppercase tracking-widest text-brand-terracotta font-bold">Armenian Academy</span>
+<span class="text-xl font-bold tracking-tight text-brand-navy">VERNATUN <span class="text-brand-terracotta font-mono font-medium text-sm px-1.5 py-0.5 rounded bg-amber-50 ml-1 border border-amber-200">CAMPUS</span></span>
+</div>
+</a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center space-x-1 pl-4 border-l border-slate-200 text-sm font-medium text-slate-600">
+<a class="px-3 py-1.5 rounded-md hover:text-slate-900 hover:bg-slate-100 transition" href="#">Программа</a>
+<a class="px-3 py-1.5 rounded-md hover:text-slate-900 hover:bg-slate-100 transition" href="#">Расписание</a>
+<a class="px-3 py-1.5 rounded-md hover:text-slate-900 hover:bg-slate-100 transition" href="#">Материалы</a>
+<a class="px-3 py-1.5 rounded-md bg-amber-50/80 text-brand-terracotta font-semibold border border-amber-200/80 flex items-center gap-1.5" href="#">
+<span class="inline-block w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+            Голосовые комнаты <span class="text-xs bg-brand-terracotta text-white px-1.5 rounded-full font-mono">LIVE 🎙️</span>
+</a>
+<a class="px-3 py-1.5 rounded-md hover:text-slate-900 hover:bg-slate-100 transition" href="#">Словарь</a>
+</nav>
+</div>
+<!-- Right User Profile Badge -->
+<div class="flex items-center space-x-4">
+<div class="hidden sm:flex flex-col text-right">
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-wider font-mono">Ученик курса</span>
+<div class="flex items-center gap-1.5">
+<span class="text-sm font-bold text-slate-900">Арам Саркисян</span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[11px] font-mono font-bold bg-amber-100 text-amber-900 border border-amber-300">B1 Explorer</span>
+</div>
+</div>
+<div class="relative cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-brand-navy text-amber-300 font-bold flex items-center justify-center border-2 border-white shadow-sm ring-2 ring-brand-terracotta/20">
+            АС
+          </div>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full"></span>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+<!-- BEGIN: EditorialHeroSection -->
+<section class="bg-gradient-to-br from-white via-[#FCFAF7] to-amber-50/40 border border-slate-200 rounded-2xl p-6 lg:p-8 shadow-sm">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Left: Swiss Typography Presentation -->
+<div class="lg:col-span-7 space-y-4">
+<div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-terracotta/10 border border-brand-terracotta/20 text-brand-terracotta text-xs font-mono font-semibold">
+<span>● 4 КОМНАТЫ В ЭФИРЕ</span>
+<span>•</span>
+<span>34 СТУДЕНТА В ДИАЛОГЕ</span>
+</div>
+<h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+            Голосовые комнаты <br/>
+<span class="text-brand-terracotta underline decoration-amber-400 decoration-wavy decoration-2">Vernatun Campus</span>
+</h1>
+<p class="text-slate-600 text-base sm:text-lg max-w-xl leading-relaxed">
+            Ежедневная разговорная практика с носителями языка и единомышленниками в интерактивных аудио-воркшопах. Практикуйте грамматику, акцент и живой сленг.
+          </p>
+<div class="pt-2 flex flex-wrap items-center gap-3">
+<button class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-brand-terracotta hover:bg-brand-terracotta-dark text-white font-medium shadow-md shadow-brand-terracotta/20 transition group">
+<span class="mr-2">⚡</span>
+<span>Быстрый вход в открытый диалог</span>
+<svg class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<button class="inline-flex items-center px-4 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-sm font-medium transition">
+<svg class="w-4 h-4 mr-2 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 6v6m0 0v6m0-6h6m-6 0H6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+              Правила участия
+            </button>
+</div>
+</div>
+<!-- Right: Interactive Live Broadcast Widget -->
+<div class="lg:col-span-5">
+<div class="bg-brand-navy rounded-2xl p-6 text-white shadow-xl relative overflow-hidden border border-slate-700">
+<!-- Decorative Armenian Ornament Accent Background -->
+<div class="absolute -right-6 -bottom-6 w-32 h-32 bg-brand-terracotta/20 rounded-full blur-2xl"></div>
+<div class="absolute top-0 right-0 p-4 opacity-15 text-5xl font-mono select-none">🎙️</div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center space-x-2">
+<span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-live-dot"></span>
+<span class="text-xs font-mono uppercase tracking-widest text-red-400 font-bold">СЕЙЧАС В ЭФИРЕ</span>
+</div>
+<span class="text-xs font-mono bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700">Main Stage</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 leading-snug">
+              Разбор сленга Еревана: как звучать естественно
+            </h3>
+<p class="text-sm text-slate-300 mb-4 flex items-center gap-1.5">
+<span>Ведущий:</span>
+<strong class="text-amber-400">Гор К.</strong>
+<span class="text-slate-400 font-mono text-xs">(Филолог, ЕГУ)</span>
+</p>
+<!-- Soundwave Visualization & Listeners -->
+<div class="bg-slate-800/80 rounded-xl p-3.5 flex items-center justify-between mb-5 border border-slate-700/60">
+<div class="flex items-end gap-1 h-6 px-1">
+<span class="w-1 bg-amber-400 rounded-full wave-bar-1"></span>
+<span class="w-1 bg-brand-terracotta rounded-full wave-bar-2"></span>
+<span class="w-1 bg-amber-300 rounded-full wave-bar-3"></span>
+<span class="w-1 bg-amber-500 rounded-full wave-bar-4"></span>
+<span class="w-1 bg-brand-terracotta rounded-full wave-bar-2"></span>
+</div>
+<div class="flex items-center space-x-2">
+<div class="flex -space-x-2 overflow-hidden">
+<div class="inline-block h-7 w-7 rounded-full ring-2 ring-brand-navy bg-amber-600 text-[10px] font-bold text-white flex items-center justify-center">ГК</div>
+<div class="inline-block h-7 w-7 rounded-full ring-2 ring-brand-navy bg-blue-600 text-[10px] font-bold text-white flex items-center justify-center">АН</div>
+<div class="inline-block h-7 w-7 rounded-full ring-2 ring-brand-navy bg-emerald-600 text-[10px] font-bold text-white flex items-center justify-center">МП</div>
+</div>
+<span class="text-xs font-mono font-medium text-slate-300">+14 слушателей</span>
+</div>
+</div>
+<button class="w-full py-2.5 px-4 bg-gradient-to-r from-brand-terracotta to-amber-600 hover:from-brand-terracotta-dark hover:to-amber-700 text-white font-semibold rounded-lg text-sm transition flex items-center justify-center gap-2">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" fill-rule="evenodd"></path></svg>
+              Подключиться к обсуждению
+            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- END: EditorialHeroSection -->
+<!-- BEGIN: ControlsAndFilters -->
+<section class="space-y-4">
+<!-- Upper row: Topic Tabs & View Toggle -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+<!-- Category Badges -->
+<div class="flex items-center space-x-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
+<button class="px-3.5 py-1.5 rounded-lg text-sm font-semibold bg-brand-navy text-white shadow-sm whitespace-nowrap">
+            Все комнаты <span class="ml-1 text-xs opacity-80 font-mono">[8]</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-lg text-sm font-medium bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 whitespace-nowrap transition">
+            Уровень А0–A1
+          </button>
+<button class="px-3.5 py-1.5 rounded-lg text-sm font-medium bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 whitespace-nowrap transition">
+            Уровень А2–B1
+          </button>
+<button class="px-3.5 py-1.5 rounded-lg text-sm font-medium bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 whitespace-nowrap transition">
+            Уровень B2–C1
+          </button>
+<button class="px-3.5 py-1.5 rounded-lg text-sm font-medium bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 whitespace-nowrap transition">
+            Разговорный клуб
+          </button>
+<button class="px-3.5 py-1.5 rounded-lg text-sm font-medium bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 whitespace-nowrap transition">
+            Культурный лекторий
+          </button>
+</div>
+<!-- View switcher -->
+<div class="flex items-center self-end md:self-auto bg-slate-100 p-1 rounded-xl border border-slate-200">
+<button class="flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-lg bg-white shadow-xs text-slate-900" title="Сетка">
+<svg class="w-3.5 h-3.5 text-brand-terracotta" fill="currentColor" viewbox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+<span>Карточки</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-lg text-slate-600 hover:text-slate-900" title="Расписание">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Таймлайн</span>
+</button>
+</div>
+</div>
+<!-- Quick filters: Native speaker, Live now, Planned -->
+<div class="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600 font-mono">
+<div class="flex items-center gap-2">
+<span class="text-slate-400 uppercase font-semibold">Фильтры:</span>
+<label class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-slate-200 rounded-md cursor-pointer hover:border-slate-300">
+<input checked="" class="rounded border-slate-300 text-brand-terracotta focus:ring-brand-terracotta/20" type="checkbox"/>
+<span>🔴 Идет сейчас</span>
+</label>
+<label class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-slate-200 rounded-md cursor-pointer hover:border-slate-300">
+<input class="rounded border-slate-300 text-brand-terracotta focus:ring-brand-terracotta/20" type="checkbox"/>
+<span>🇦🇲 Только с носителем</span>
+</label>
+<label class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-slate-200 rounded-md cursor-pointer hover:border-slate-300">
+<input class="rounded border-slate-300 text-brand-terracotta focus:ring-brand-terracotta/20" type="checkbox"/>
+<span>🗓️ Запланировано на сегодня</span>
+</label>
+</div>
+<div class="text-slate-500">
+          Часовой пояс: <span class="text-slate-900 font-semibold">GMT+4 (Ереван)</span>
+</div>
+</div>
+</section>
+<!-- END: ControlsAndFilters -->
+<!-- BEGIN: CardsGrid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- CARD 1: Conversational Intensive A1 -->
+<article class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between relative group">
+<div>
+<!-- Status and Level Header -->
+<div class="flex items-center justify-between mb-3.5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-red-100 text-red-700">
+<span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
+              LIVE • Идёт 15 мин
+            </span>
+<span class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200 text-[11px] font-mono font-bold tracking-wide">
+              УРОВЕНЬ A1
+            </span>
+</div>
+<!-- Room Title -->
+<h2 class="text-lg font-bold text-slate-900 group-hover:text-brand-terracotta transition mb-2">
+            Разговорный интенсив: Первые фразы в Ереване
+          </h2>
+<p class="text-sm text-slate-600 line-clamp-2 mb-4">
+            Разбираем практические фразы для такси, супермаркета, заказа еды и дружелюбных диалогов на улицах.
+          </p>
+<!-- Speakers and Voice Waves -->
+<div class="bg-slate-50 rounded-xl p-3 border border-slate-100 mb-4 flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-amber-500 text-white text-xs font-bold flex items-center justify-center ring-2 ring-white">АН</div>
+<div class="w-8 h-8 rounded-full bg-slate-700 text-white text-xs font-bold flex items-center justify-center ring-2 ring-white">МГ</div>
+<div class="w-8 h-8 rounded-full bg-brand-terracotta text-white text-xs font-bold flex items-center justify-center ring-2 ring-white">ТВ</div>
+</div>
+<span class="text-xs text-slate-500 font-mono font-medium">3 спикера</span>
+</div>
+<div class="text-xs text-slate-600 font-medium flex items-center gap-1 bg-white px-2 py-1 rounded-md border border-slate-200">
+<span>👥 7 слушателей</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-2 py-2.5 px-4 rounded-xl bg-brand-navy hover:bg-slate-800 text-white text-sm font-semibold transition flex items-center justify-center gap-2 group-hover:bg-brand-terracotta">
+<span>Присоединиться к эфиру</span>
+<span class="font-mono">→</span>
+</button>
+</article>
+<!-- CARD 2: Urban Slang Yerevan vs Gyumri B1-B2 -->
+<article class="bg-white rounded-2xl border-2 border-brand-terracotta/40 p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between relative">
+<div class="absolute -top-3 right-6 bg-brand-terracotta text-white font-mono text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded shadow">
+          Популярно сейчас 🔥
+        </div>
+<div>
+<div class="flex items-center justify-between mb-3.5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-red-100 text-red-700">
+<span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
+              LIVE • 12 онлайн
+            </span>
+<span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 text-[11px] font-mono font-bold tracking-wide">
+              УРОВЕНЬ B1-B2
+            </span>
+</div>
+<h2 class="text-lg font-bold text-slate-900 mb-2">
+            Городской сленг и юмор: Ереван vs Гюмри
+          </h2>
+<div class="flex items-center gap-2 text-xs text-slate-600 mb-3 font-medium">
+<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 font-semibold">Носитель языка</span>
+<span>Ведущий: <strong>Давид М.</strong></span>
+</div>
+<!-- Feature Badge -->
+<div class="mb-4 inline-flex items-center gap-1.5 text-xs font-medium text-brand-navy bg-slate-100 px-2.5 py-1.5 rounded-lg border border-slate-200 w-full">
+<span>🖥️</span>
+<span>Интерактив: Интерактивная доска &amp; PDF-разбор идиом</span>
+</div>
+<!-- Soundwave mini preview -->
+<div class="flex items-center justify-between text-xs text-slate-500 font-mono border-t border-slate-100 pt-3 mb-2">
+<span>Микрофон открыт для вопросов</span>
+<span class="text-emerald-600 font-semibold">● Свободно 4 слота</span>
+</div>
+</div>
+<button class="w-full mt-2 py-2.5 px-4 rounded-xl bg-brand-terracotta hover:bg-brand-terracotta-dark text-white text-sm font-semibold transition flex items-center justify-center gap-2">
+<span>Присоединиться к эфиру</span>
+<span class="font-mono">→</span>
+</button>
+</article>
+<!-- CARD 3: Book Club Toumanian -->
+<article class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3.5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-amber-100 text-amber-800 border border-amber-300">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+              Старт через 20 минут
+            </span>
+<span class="px-2 py-0.5 rounded bg-purple-50 text-purple-700 border border-purple-200 text-[11px] font-mono font-bold tracking-wide">
+              КУЛЬТУРА &amp; ЛИТЕРАТУРА
+            </span>
+</div>
+<h2 class="text-lg font-bold text-slate-900 mb-2">
+            Книжный клуб: Ованес Туманян и сказки
+          </h2>
+<p class="text-sm text-slate-600 mb-4">
+            Чтение сказки «Капля мёда» в оригинале с медленным разбором сложных архаичных оборотов и народной мудрости.
+          </p>
+<div class="bg-amber-50/60 rounded-xl p-3 border border-amber-100 mb-4 text-xs space-y-1">
+<div class="text-amber-900 font-medium">Модератор: Анаит Григорян</div>
+<div class="text-slate-500 font-mono">Текст отправлен в учебный чат группы</div>
+</div>
+</div>
+<button class="w-full mt-2 py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-semibold transition flex items-center justify-center gap-2 border border-slate-300">
+<span>Занять место 🔔</span>
+<span class="text-xs text-slate-500 font-mono">(18 записались)</span>
+</button>
+</article>
+<!-- CARD 4: Debate IT & Life in Armenia B2-C1 -->
+<article class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3.5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-red-100 text-red-700">
+<span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
+              LIVE • 9 участников
+            </span>
+<span class="px-2 py-0.5 rounded bg-rose-50 text-rose-800 border border-rose-200 text-[11px] font-mono font-bold tracking-wide">
+              УРОВЕНЬ B2-C1
+            </span>
+</div>
+<h2 class="text-lg font-bold text-slate-900 mb-2">
+            Дебаты: IT-индустрия и современная жизнь в Армении
+          </h2>
+<p class="text-sm text-slate-600 mb-4">
+            Продвинутый формат дискуссии без перехода на русский язык. Обсуждение стартап-экосистемы, релокации и инфраструктуры.
+          </p>
+<div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-xs mb-4">
+<span class="text-slate-600 font-medium">Спикеры на сцене: 4 / 6</span>
+<span class="font-mono text-brand-terracotta font-semibold">Строгий тайминг 2 мин</span>
+</div>
+</div>
+<button class="w-full mt-2 py-2.5 px-4 rounded-xl bg-brand-navy hover:bg-slate-800 text-white text-sm font-semibold transition flex items-center justify-center gap-2">
+<span>Присоединиться к эфиру</span>
+<span class="font-mono">→</span>
+</button>
+</article>
+<!-- CARD 5: Grammar Workshop A2 Movement Verbs -->
+<article class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3.5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-red-100 text-red-700">
+<span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
+              LIVE • 5 участников
+            </span>
+<span class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200 text-[11px] font-mono font-bold tracking-wide">
+              УРОВЕНЬ A2
+            </span>
+</div>
+<h2 class="text-lg font-bold text-slate-900 mb-2">
+            Грамматический воркшоп: Глаголы движения (գնալ, գալ, մտնել)
+          </h2>
+<p class="text-sm text-slate-600 mb-4">
+            Интерактивный тренажер: каждый участник строит 5 спонтанных предложений с коррекцией произношения преподавателем.
+          </p>
+<div class="flex items-center gap-2 text-xs font-mono text-slate-500 mb-4 bg-slate-50 p-2 rounded-lg">
+<span>📝 Конспект синхронизируется в Notion</span>
+</div>
+</div>
+<button class="w-full mt-2 py-2.5 px-4 rounded-xl bg-brand-navy hover:bg-slate-800 text-white text-sm font-semibold transition flex items-center justify-center gap-2">
+<span>Присоединиться к эфиру</span>
+<span class="font-mono">→</span>
+</button>
+</article>
+<!-- CARD 6: Create New Room Action Card -->
+<article class="border-2 border-dashed border-slate-300 hover:border-brand-terracotta bg-slate-50/50 hover:bg-amber-50/20 rounded-2xl p-6 transition flex flex-col items-center justify-center text-center group cursor-pointer">
+<div class="w-14 h-14 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-brand-terracotta text-2xl shadow-sm mb-4 group-hover:scale-110 group-hover:border-brand-terracotta transition-transform">
+          +
+        </div>
+<h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-brand-terracotta transition">
+          Создать свой аудио-воркшоп
+        </h3>
+<p class="text-xs text-slate-500 max-w-xs mb-4">
+          Запустите спонтанный диалог, созвон для домашнего задания или встречу разговорного клуба по интересам.
+        </p>
+<span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-white border border-slate-300 text-slate-700 text-xs font-mono font-semibold shadow-xs">
+          Открыть конструктор комнат →
+        </span>
+</article>
+</section>
+<!-- END: CardsGrid -->
+<!-- BEGIN: QuickRulesBanner -->
+<section class="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-xl shrink-0">
+          💡
+        </div>
+<div>
+<h4 class="font-bold text-slate-900 text-sm">Правило дружелюбной среды Vernatun</h4>
+<p class="text-xs text-slate-500">Не бойтесь делать ошибки в ударениях и падежах. Каждая комната модерируется для взаимной поддержки учащихся любого уровня.</p>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<a class="text-xs font-mono text-brand-terracotta hover:underline font-bold" href="#">Справочник фраз вежливости →</a>
+</div>
+</section>
+<!-- END: QuickRulesBanner -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-12 font-mono">
+<div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+<div class="flex items-center space-x-2">
+<span class="font-bold text-slate-800">VERNATUN CAMPUS</span>
+<span>•</span>
+<span>Образовательное пространство армянского клуба</span>
+</div>
+<div>
+<span>Telegram бот поддержки: </span>
+<a class="text-brand-terracotta hover:underline font-semibold" href="https://t.me/vernatunbot">@vernatunbot</a>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+</body></html>

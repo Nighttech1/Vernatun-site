@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="ru" data-root="/">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Голосовая комната Вернатун" />
+  <title>Комната — Вернатун</title>
+  <link rel="canonical" href="https://vernatunspeakclub.com/room" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/js/tailwind-config.js?v=20260920e"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
+  <link rel="preload" href="/fonts/CenturyGothic.ttf?v=20260920e" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="/fonts/CenturyGothic-Bold.ttf?v=20260920e" as="font" type="font/ttf" crossorigin />
+  <link rel="stylesheet" href="/css/site.css?v=20260920e" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+  <script src="https://cdn.jsdelivr.net/npm/livekit-client@2.9.1/dist/livekit-client.umd.min.js"></script>
+  <style>
+    .speak-dot {
+      width: 0.85rem;
+      height: 0.85rem;
+      border-radius: 9999px;
+      background: rgba(42, 90, 132, 0.25);
+      flex-shrink: 0;
+      transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+    }
+    .speak-dot.is-on {
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.28);
+      transform: scale(1.15);
+    }
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 9999px;
+      background: #2A5A84;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+    .chat-log {
+      max-height: 14rem;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  </style>
+</head>
+<body class="paper-grain min-h-screen antialiased text-azure" x-data="lightbox()" @keydown.escape.window="close()">
+  <div id="site-header"></div>
+  <script src="/js/site.js?v=20260920e"></script>
+  <main>
+    <section class="py-16 sm:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div class="reveal text-center sm:text-left">
+          <p class="text-xs font-bold uppercase tracking-widest text-terracotta">Lounge</p>
+          <h1 class="mt-2 font-display text-3xl font-bold text-azure sm:text-4xl">Голосовая комната</h1>
+          <p class="mt-3 max-w-2xl text-azure/75">
+            Голос и чат в одной комнате. Скопируйте ссылку и отправьте друзьям — они попадут сюда же.
+          </p>
+          <p class="mt-2">
+            <a href="/lounge" class="text-sm font-bold text-terracotta underline-offset-2 hover:underline">← Все комнаты</a>
+          </p>
+        </div>
+
+        <div
+          class="reveal mt-10 max-w-xl rounded-2xl border border-mist bg-parchment/80 p-6 shadow-sm sm:p-8"
+          x-data="voiceRoom()"
+          x-init="boot()"
+        >
+          <p class="font-display text-2xl text-azure" x-text="roomTitle || 'Комната'"></p>
+          <p class="mt-1 text-sm text-azure/60" x-show="roomId">id: <span x-text="roomId"></span></p>
+
+          <ol class="mt-6 space-y-3 text-sm text-azure/85">
+            <li class="flex items-start">
+              <span class="step-num">1</span>
+              <span>Нажмите зелёную кнопку <strong>«Войти в комнату»</strong> — вам дадут имя вроде «ахперик 1».</span>
+            </li>
+            <li class="flex items-start">
+              <span class="step-num">2</span>
+              <span>Нажмите <strong>«Включить микрофон»</strong> и разрешите доступ в браузере.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="step-num">3</span>
+              <span>Говорите — слева от ника загорится зелёный кружок. Пишите в чат ниже.</span>
+            </li>
+          </ol>
+
+          <p class="mt-6 text-sm font-bold text-azure" x-show="displayName">
+            Ваше имя: <span class="text-terracotta" x-text="displayName"></span>
+          </p>
+
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <button
+              type="button"
+              class="site-cta rounded-full px-6 py-3 text-base font-bold disabled:opacity-50"
+              @click="join()"
+              :disabled="busy || connected || !roomId"
+            >
+              <span x-show="!busy && !connected">Войти в комнату</span>
+              <span x-show="busy && !connected">Подключение…</span>
+              <span x-show="connected">Вы в комнате</span>
+            </button>
+            <button
+              type="button"
+              class="rounded-full border-2 border-azure/40 bg-white px-6 py-3 text-base font-bold text-azure transition hover:bg-azure/5 disabled:opacity-40"
+              @click="toggleMic()"
+              :disabled="!connected || busy"
+            >
+              <span x-text="micOn ? 'Выключить микрофон' : 'Включить микрофон'"></span>
+            </button>
+            <button
+              type="button"
+              class="rounded-full border border-terracotta/50 px-5 py-3 text-sm font-bold text-terracotta disabled:opacity-40"
+              @click="leave()"
+              :disabled="!connected || busy"
+            >Выйти</button>
+          </div>
+
+          <div class="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center">
+            <button
+              type="button"
+              class="rounded-full border-2 border-sungold/60 bg-white px-5 py-2.5 text-sm font-bold text-azure transition hover:bg-sungold/10 disabled:opacity-40"
+              @click="copyLink()"
+              :disabled="!roomId"
+            >
+              <span x-text="linkCopied ? 'Ссылка скопирована' : 'Скопировать ссылку на комнату'"></span>
+            </button>
+            <p class="truncate text-xs text-azure/50" x-show="shareUrl" x-text="shareUrl"></p>
+          </div>
+
+          <p class="mt-5 rounded-lg bg-white/60 px-3 py-2 text-sm leading-relaxed text-azure/80" x-text="status"></p>
+
+          <div class="mt-8" x-show="connected">
+            <p class="text-xs font-bold uppercase tracking-widest text-sungold">Кто в комнате</p>
+            <p class="mt-1 text-xs text-azure/55">Зелёный кружок = сейчас говорит</p>
+            <ul class="mt-4 space-y-3">
+              <template x-for="p in everyone" :key="p.id">
+                <li class="flex items-center gap-3 rounded-xl border border-mist bg-white/70 px-3 py-2.5">
+                  <span class="speak-dot" :class="p.speaking ? 'is-on' : ''" :title="p.speaking ? 'Говорит' : 'Молчит'"></span>
+                  <span class="font-display text-lg text-azure" x-text="p.name"></span>
+                  <span class="ml-auto text-xs text-azure/45" x-show="p.isMe">это вы</span>
+                </li>
+              </template>
+            </ul>
+          </div>
+
+          <div class="mt-8 border-t border-mist pt-6" x-show="roomId">
+            <p class="text-xs font-bold uppercase tracking-widest text-sungold">Чат комнаты</p>
+            <p class="mt-1 text-xs text-azure/55">Сообщения хранятся, пока в комнате есть люди. Когда все выйдут — чат очистится.</p>
+
+            <div class="chat-log mt-4 space-y-2 rounded-xl border border-mist bg-white/70 p-3" x-ref="chatLog">
+              <p class="text-sm text-azure/45" x-show="!messages.length">Пока тихо — напишите первым.</p>
+              <template x-for="m in messages" :key="m.id">
+                <div class="text-sm leading-snug">
+                  <span class="font-bold text-terracotta" x-text="m.name"></span>
+                  <span class="text-azure/80" x-text="': ' + m.text"></span>
+                </div>
+              </template>
+            </div>
+
+            <form class="mt-3 flex gap-2" @submit.prevent="sendChat()">
+              <input
+                type="text"
+                maxlength="1000"
+                class="min-w-0 flex-1 rounded-full border border-mist bg-white px-4 py-2.5 text-sm text-azure outline-none focus:border-azure/40"
+                placeholder="Написать в комнату…"
+                x-model="chatDraft"
+                :disabled="!connected || chatBusy"
+              />
+              <button
+                type="submit"
+                class="shrink-0 rounded-full bg-azure px-4 py-2.5 text-sm font-bold text-white disabled:opacity-40"
+                :disabled="!connected || chatBusy || !chatDraft.trim()"
+              >Отправить</button>
+            </form>
+          </div>
+
+          <p class="mt-8 text-xs leading-relaxed text-azure/55">
+            Лучше в наушниках (меньше эха). Ссылка ведёт прямо в эту комнату.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script>VernatunChrome.mountRest();</script>
+  <script>
+    function voiceRoom() {
+      return {
+        roomId: '',
+        roomTitle: '',
+        shareUrl: '',
+        linkCopied: false,
+        displayName: '',
+        status: 'Выберите комнату из списка или откройте ссылку с ?room=…',
+        connected: false,
+        micOn: false,
+        localSpeaking: false,
+        busy: false,
+        everyone: [],
+        room: null,
+        speakingIds: {},
+        messages: [],
+        chatDraft: '',
+        chatBusy: false,
+        _seenIds: {},
+
+        boot() {
+          var q = new URLSearchParams(window.location.search);
+          this.roomId = (q.get('room') || '').trim();
+          if (!this.roomId) {
+            this.status = 'Нет номера комнаты. Вернитесь в список и выберите комнату.';
+            return;
+          }
+          this.shareUrl = window.location.origin + '/room?room=' + encodeURIComponent(this.roomId);
+          document.title = 'Комната — Вернатун';
+          this.status = 'Нажмите «Войти в комнату». Имя «ахперик …» выдастся само.';
+          this.loadMeta();
+          this.loadChat();
+        },
+
+        async loadMeta() {
+          try {
+            var res = await fetch('/api/lounge/rooms');
+            var data = await res.json();
+            var list = data.rooms || [];
+            for (var i = 0; i < list.length; i++) {
+              if (list[i].id === this.roomId) {
+                this.roomTitle = list[i].title || this.roomId;
+                document.title = (this.roomTitle || 'Комната') + ' — Вернатун';
+                return;
+              }
+            }
+            this.roomTitle = this.roomId;
+          } catch (e) {
+            this.roomTitle = this.roomId;
+          }
+        },
+
+        async copyLink() {
+          if (!this.shareUrl) return;
+          try {
+            await navigator.clipboard.writeText(this.shareUrl);
+            this.linkCopied = true;
+            var self = this;
+            setTimeout(function () { self.linkCopied = false; }, 2500);
+          } catch (e) {
+            prompt('Скопируйте ссылку:', this.shareUrl);
+          }
+        },
+
+        async loadChat() {
+          if (!this.roomId) return;
+          try {
+            var res = await fetch('/api/lounge/chat?room=' + encodeURIComponent(this.roomId));
+            var data = await res.json();
+            if (!res.ok) return;
+            var list = data.messages || [];
+            this._seenIds = {};
+            list.forEach(function (m) { if (m.id) this._seenIds[m.id] = true; }.bind(this));
+            this.messages = list;
+            this.$nextTick(function () { this.scrollChat(); }.bind(this));
+          } catch (e) {}
+        },
+
+        scrollChat() {
+          var el = this.$refs.chatLog;
+          if (el) el.scrollTop = el.scrollHeight;
+        },
+
+        upsertMessage(m) {
+          if (!m || !m.id) return;
+          if (this._seenIds[m.id]) return;
+          this._seenIds[m.id] = true;
+          this.messages.push(m);
+          this.$nextTick(function () { this.scrollChat(); }.bind(this));
+        },
+
+        async sendChat() {
+          var text = (this.chatDraft || '').trim();
+          if (!text || !this.connected || this.chatBusy) return;
+          this.chatBusy = true;
+          try {
+            var res = await fetch('/api/lounge/chat', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                room: this.roomId,
+                name: this.displayName || 'гость',
+                text: text
+              })
+            });
+            var data = await res.json();
+            if (!res.ok) throw new Error(data.error || 'Не отправилось');
+            var msg = data.message || data;
+            this.upsertMessage(msg);
+            this.chatDraft = '';
+            this.broadcastChat(msg);
+          } catch (e) {
+            this.status = 'Чат: ' + (e && e.message ? e.message : e);
+          } finally {
+            this.chatBusy = false;
+          }
+        },
+
+        broadcastChat(msg) {
+          if (!this.room || !window.LivekitClient) return;
+          try {
+            var bytes = new TextEncoder().encode(JSON.stringify({ type: 'chat', message: msg }));
+            this.room.localParticipant.publishData(bytes, { reliable: true });
+          } catch (e) {}
+        },
+
+        async join() {
+          if (this.busy || this.connected || !this.roomId) return;
+          this.busy = true;
+          this.status = 'Подключаемся…';
+          try {
+            var res = await fetch('/api/lounge/token?room=' + encodeURIComponent(this.roomId));
+            var data = await res.json();
+            if (!res.ok) throw new Error(data.error || 'Не удалось войти');
+
+            var displayName = data.display_name || '';
+            if (data.room_title) this.roomTitle = data.room_title;
+            var LK = window.LivekitClient;
+            if (!LK) throw new Error('Не загрузился голосовой модуль. Обновите страницу.');
+
+            var self = this;
+            this.room = new LK.Room({ adaptiveStream: true, dynacast: true });
+            this.room.on(LK.RoomEvent.ParticipantConnected, function () {
+              self.refreshEveryone();
+            });
+            this.room.on(LK.RoomEvent.ParticipantDisconnected, function () {
+              self.refreshEveryone();
+            });
+            this.room.on(LK.RoomEvent.ParticipantMetadataChanged, function () {
+              self.refreshEveryone();
+            });
+            this.room.on(LK.RoomEvent.ActiveSpeakersChanged, function (speakers) {
+              var map = {};
+              (speakers || []).forEach(function (s) { map[s.identity] = true; });
+              self.speakingIds = map;
+              self.localSpeaking = !!(self.room && map[self.room.localParticipant.identity]);
+              self.refreshEveryone();
+            });
+            this.room.on(LK.RoomEvent.TrackSubscribed, function (track) {
+              if (track.kind === 'audio') {
+                var el = track.attach();
+                el.autoplay = true;
+                el.setAttribute('data-livekit-audio', '1');
+                document.body.appendChild(el);
+              }
+            });
+            this.room.on(LK.RoomEvent.DataReceived, function (payload) {
+              try {
+                var raw = new TextDecoder().decode(payload);
+                var obj = JSON.parse(raw);
+                if (obj && obj.type === 'chat' && obj.message) {
+                  self.upsertMessage(obj.message);
+                }
+              } catch (e) {}
+            });
+
+            await this.room.connect(data.url, data.token);
+
+            if (!displayName) {
+              displayName = self.pickAhperikLocally();
+              try { await self.room.localParticipant.setName(displayName); } catch (e) {}
+            }
+            self.displayName = displayName;
+
+            this.connected = true;
+            this.status = 'Вы в комнате как «' + displayName + '». Теперь включите микрофон (кнопка ниже).';
+            this.refreshEveryone();
+            await this.loadChat();
+          } catch (e) {
+            this.status = 'Ошибка: ' + (e && e.message ? e.message : e);
+          } finally {
+            this.busy = false;
+          }
+        },
+
+        pickAhperikLocally() {
+          var used = {};
+          var re = /^ахперик\s+(\d+)$/i;
+          if (this.room) {
+            this.room.remoteParticipants.forEach(function (p) {
+              var m = (p.name || p.identity || '').match(re);
+              if (m) used[parseInt(m[1], 10)] = true;
+            });
+          }
+          var n = 1;
+          while (used[n]) n++;
+          return 'ахперик ' + n;
+        },
+
+        refreshEveryone() {
+          if (!this.room) { this.everyone = []; return; }
+          var list = [];
+          var self = this;
+          var local = this.room.localParticipant;
+          list.push({
+            id: local.identity,
+            name: this.displayName || local.name || local.identity,
+            speaking: !!this.speakingIds[local.identity],
+            isMe: true
+          });
+          this.room.remoteParticipants.forEach(function (p) {
+            list.push({
+              id: p.identity,
+              name: p.name || p.identity,
+              speaking: !!self.speakingIds[p.identity],
+              isMe: false
+            });
+          });
+          list.sort(function (a, b) {
+            var na = parseInt((a.name.match(/\d+/) || [999])[0], 10);
+            var nb = parseInt((b.name.match(/\d+/) || [999])[0], 10);
+            return na - nb;
+          });
+          this.everyone = list;
+        },
+
+        async toggleMic() {
+          if (!this.room || this.busy) return;
+          this.busy = true;
+          try {
+            await this.room.localParticipant.setMicrophoneEnabled(!this.micOn);
+            this.micOn = !this.micOn;
+            this.status = this.micOn
+              ? 'Микрофон включён. Говорите — кружок слева от вашего ника загорится зелёным.'
+              : 'Микрофон выключен. Вы по-прежнему слышите остальных.';
+          } catch (e) {
+            this.status = 'Микрофон: ' + (e && e.message ? e.message : e);
+          } finally {
+            this.busy = false;
+          }
+        },
+
+        async leave() {
+          if (this.room) {
+            await this.room.disconnect();
+            this.room = null;
+          }
+          document.querySelectorAll('[data-livekit-audio]').forEach(function (el) { el.remove(); });
+          this.connected = false;
+          this.micOn = false;
+          this.localSpeaking = false;
+          this.speakingIds = {};
+          this.everyone = [];
+          this.displayName = '';
+          this.status = 'Вы вышли. Можно войти снова.';
+        }
+      };
+    }
+  </script>
+</body>
+</html>

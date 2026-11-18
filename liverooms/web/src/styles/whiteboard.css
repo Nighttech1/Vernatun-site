@@ -1,0 +1,420 @@
+/* Vernatun whiteboard custom shapes */
+
+.wb-toolbar-dock {
+  position: absolute;
+  z-index: 400;
+  pointer-events: none;
+}
+
+.wb-toolbar-dock--vertical {
+  left: 16px;
+  top: 80px;
+  bottom: auto;
+  transform: none;
+}
+
+.wb-toolbar-island {
+  pointer-events: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.375rem;
+  border-radius: 1rem;
+  border: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.wb-toolbar-island--vertical {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  padding: 0.35rem;
+  border-radius: 1.25rem;
+  gap: 0.2rem;
+}
+
+.wb-toolbar-grip {
+  width: 2.25rem;
+  height: 1.25rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: #f1f5f9;
+  color: #94a3b8;
+  font-size: 0.65rem;
+  letter-spacing: -0.08em;
+  cursor: grab;
+  line-height: 1;
+  padding: 0;
+}
+
+.wb-toolbar-grip:active {
+  cursor: grabbing;
+}
+
+/* C-253: host mod toolbar — same island language, horizontal */
+.host-board-dock {
+  z-index: 420;
+  pointer-events: none;
+}
+
+.host-board-island {
+  pointer-events: auto;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.3rem 0.35rem;
+  border-radius: 1.25rem;
+}
+
+.host-board-grip {
+  width: 1.35rem;
+  height: 2.25rem;
+  letter-spacing: -0.12em;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+}
+
+.host-board-tool-danger {
+  color: #991b1b;
+}
+
+.host-board-tool-danger:hover:not(:disabled) {
+  background: rgba(185, 28, 28, 0.1);
+}
+
+.wb-tool-btn--icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.wb-stamps-pop--side {
+  position: absolute;
+  left: calc(100% + 0.4rem);
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  margin: 0;
+  flex-direction: column;
+}
+
+.wb-pdf-nav-dock {
+  position: absolute;
+  top: 0.75rem;
+  left: 50%;
+  z-index: 350;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.wb-pdf-nav-island {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #2a5a84;
+}
+
+.wb-tool-btn {
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #2a5a84;
+  background: transparent;
+  cursor: pointer;
+}
+
+.wb-tool-btn:hover:not(:disabled) {
+  background: #f1f5f9;
+}
+
+.wb-tool-btn--active {
+  background: #c25e28;
+  color: #fff;
+}
+
+.wb-tool-btn--disabled,
+.wb-tool-btn:disabled {
+  color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.wb-tool-sep {
+  margin: 0 0.25rem;
+  width: 1px;
+  height: 1.5rem;
+  background: #e2e8f0;
+}
+
+.wb-stamps-pop {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-bottom: 0.5rem;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.wb-stamp-btn {
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 1.125rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+.wb-stamp-btn:hover {
+  background: #f1f5f9;
+}
+
+.wb-file-input {
+  display: none;
+}
+
+/* C-223: color/size side popover for draw tools */
+.wb-draw-style-pop {
+  position: absolute;
+  left: calc(100% + 0.45rem);
+  top: 3.2rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 9.5rem;
+  padding: 0.5rem;
+  border-radius: 0.85rem;
+  border: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
+}
+
+.wb-draw-style-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.wb-draw-color-swatch {
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.12);
+}
+
+.wb-draw-color-swatch.is-active {
+  border-color: #2a5a84;
+  box-shadow: 0 0 0 2px rgba(42, 90, 132, 0.35);
+}
+
+.wb-draw-size-btn {
+  min-width: 1.75rem;
+  height: 1.55rem;
+  padding: 0 0.35rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.45rem;
+  background: #f8fafc;
+  color: #2a5a84;
+  font-size: 0.65rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.wb-draw-size-btn.is-active {
+  background: #2a5a84;
+  color: #fff;
+  border-color: #2a5a84;
+}
+
+@media (max-width: 768px) {
+  .wb-toolbar-dock--vertical {
+    left: 8px !important;
+    top: auto !important;
+    bottom: 12px;
+  }
+
+  .wb-toolbar-island--vertical {
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: calc(100vw - 1.5rem);
+  }
+
+  .wb-draw-style-pop {
+    left: 0;
+    right: auto;
+    top: auto;
+    bottom: calc(100% + 0.4rem);
+  }
+}
+
+.wb-pdf-nav-btn {
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+.wb-pdf-nav-btn:hover:not(:disabled) {
+  background: #f1f5f9;
+}
+
+.wb-pdf-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Vernatun whiteboard custom shapes */
+
+.vernatun-wb .vc-card,
+.vernatun-wb .as-card {
+  box-sizing: border-box;
+  padding: 0.75rem;
+  background: #fff;
+  border: 1px solid var(--brand-border, #e2e8f0);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(42, 90, 132, 0.08);
+  overflow: hidden;
+  font-family: var(--font-sans, system-ui, sans-serif);
+}
+
+.vc-badge {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  padding: 0.15rem 0.45rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  color: #fff;
+}
+
+.vc-badge--common {
+  background: #64748b;
+}
+.vc-badge--yerevan {
+  background: #2a5a84;
+}
+.vc-badge--gyumri {
+  background: #c25e28;
+}
+.vc-badge--slang {
+  background: #7c3aed;
+}
+
+.vc-hy {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.vc-translit {
+  margin: 0.2rem 0 0;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.vc-ru {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2a5a84;
+}
+
+.vc-author,
+.as-author {
+  margin: 0.4rem 0 0;
+  font-size: 0.65rem;
+  color: #94a3b8;
+}
+
+.vc-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.vc-input {
+  width: 100%;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+}
+
+.vc-input--hy {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.as-title {
+  margin: 0 0 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #2a5a84;
+}
+
+.as-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.as-btn {
+  flex-shrink: 0;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  background: #c25e28;
+  border: none;
+  border-radius: 8px;
+}
+
+.as-bar {
+  flex: 1;
+  height: 0.35rem;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.as-bar-fill {
+  height: 100%;
+  background: #2a5a84;
+}

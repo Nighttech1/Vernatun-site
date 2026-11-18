@@ -1,0 +1,188 @@
+{
+  "report": [
+    {
+      "name": "home",
+      "overflowX": false,
+      "sw": 393,
+      "cw": 393,
+      "gapBrandCta": 32,
+      "brand": {
+        "left": 114,
+        "right": 189,
+        "w": 75,
+        "h": 19
+      },
+      "cta": {
+        "left": 221,
+        "right": 377,
+        "w": 156,
+        "h": 32
+      },
+      "burger": {
+        "left": 16,
+        "right": 60,
+        "w": 44,
+        "h": 44
+      },
+      "hScrollIds": [
+        "film-hero"
+      ]
+    },
+    {
+      "name": "about",
+      "overflowX": false,
+      "sw": 393,
+      "cw": 393,
+      "gapBrandCta": 32,
+      "brand": {
+        "left": 114,
+        "right": 189,
+        "w": 75,
+        "h": 19
+      },
+      "cta": {
+        "left": 221,
+        "right": 377,
+        "w": 156,
+        "h": 32
+      },
+      "burger": {
+        "left": 16,
+        "right": 60,
+        "w": 44,
+        "h": 44
+      },
+      "hScrollIds": [
+        "film-hero"
+      ]
+    },
+    {
+      "name": "schedule",
+      "overflowX": false,
+      "sw": 393,
+      "cw": 393,
+      "gapBrandCta": 32,
+      "brand": {
+        "left": 114,
+        "right": 189,
+        "w": 75,
+        "h": 19
+      },
+      "cta": {
+        "left": 221,
+        "right": 377,
+        "w": 156,
+        "h": 32
+      },
+      "burger": {
+        "left": 16,
+        "right": 60,
+        "w": 44,
+        "h": 44
+      },
+      "hScrollIds": []
+    },
+    {
+      "name": "materials",
+      "overflowX": false,
+      "sw": 393,
+      "cw": 393,
+      "gapBrandCta": 32,
+      "brand": {
+        "left": 114,
+        "right": 189,
+        "w": 75,
+        "h": 19
+      },
+      "cta": {
+        "left": 221,
+        "right": 377,
+        "w": 156,
+        "h": 32
+      },
+      "burger": {
+        "left": 16,
+        "right": 60,
+        "w": 44,
+        "h": 44
+      },
+      "hScrollIds": []
+    },
+    {
+      "name": "articles",
+      "overflowX": false,
+      "sw": 393,
+      "cw": 393,
+      "gapBrandCta": 32,
+      "brand": {
+        "left": 114,
+        "right": 189,
+        "w": 75,
+        "h": 19
+      },
+      "cta": {
+        "left": 221,
+        "right": 377,
+        "w": 156,
+        "h": 32
+      },
+      "burger": {
+        "left": 16,
+        "right": 60,
+        "w": 44,
+        "h": 44
+      },
+      "hScrollIds": []
+    },
+    {
+      "name": "contacts",
+      "overflowX": false,
+      "sw": 393,
+      "cw": 393,
+      "gapBrandCta": 32,
+      "brand": {
+        "left": 114,
+        "right": 189,
+        "w": 75,
+        "h": 19
+      },
+      "cta": {
+        "left": 221,
+        "right": 377,
+        "w": 156,
+        "h": 32
+      },
+      "burger": {
+        "left": 16,
+        "right": 60,
+        "w": 44,
+        "h": 44
+      },
+      "hScrollIds": []
+    }
+  ],
+  "formats": {
+    "cards": 6,
+    "opacity0": 0,
+    "groupHover": 0,
+    "cardW": 361,
+    "cardH": 352
+  },
+  "club": [
+    {
+      "cls": "bento-tile bento-tile--equal bento-tile-",
+      "w": 361,
+      "h": 224
+    },
+    {
+      "cls": "bento-tile bento-tile--equal bento-tile-",
+      "w": 361,
+      "h": 224
+    },
+    {
+      "cls": "bento-tile bento-tile--equal bento-tile-",
+      "w": 361,
+      "h": 224
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+listening-port=3478
+fingerprint
+lt-cred-mech
+realm=vernatunspeakclub.com
+user=vernatun:TURN_CREDENTIAL_PLACEHOLDER
+no-cli
+no-tls
+no-dtls
+min-port=49160
+max-port=49200
+external-ip=LIVEKIT_NODE_IP

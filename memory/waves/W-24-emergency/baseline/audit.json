@@ -1,0 +1,38 @@
+{
+  "iphone15": {
+    "info": {
+      "headerLen": 8559,
+      "sections": [
+        "film-hero",
+        "club",
+        "formats",
+        "atmosphere",
+        "faq"
+      ],
+      "h1": "О нашем клубе",
+      "bodyLen": 2368,
+      "filmH": 659,
+      "cssRules": 3,
+      "cta": true
+    },
+    "fails": []
+  },
+  "pixel7": {
+    "info": {
+      "headerLen": 8559,
+      "sections": [
+        "film-hero",
+        "club",
+        "formats",
+        "atmosphere",
+        "faq"
+      ],
+      "h1": "О нашем клубе",
+      "bodyLen": 2368,
+      "filmH": 839,
+      "cssRules": 3,
+      "cta": true
+    },
+    "fails": []
+  }
+}

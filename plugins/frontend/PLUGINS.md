@@ -22,6 +22,11 @@
 | ESLint | extension | `dbaeumer.vscode-eslint` | JS/TS |
 | Tailwind CSS IntelliSense | extension | `bradlc.vscode-tailwindcss` | только если проект на TW |
 | Playwright | extension | `ms-playwright.playwright` | e2e / скрины |
+| livekit-voice-rooms | skill | `.cursor/skills/livekit-voice-rooms/SKILL.md` | раздел Lounge |
+| voice-room-didactics | skill | `.cursor/skills/voice-room-didactics/SKILL.md` | Scenario / Lexicon / Meter UI |
+| voice-room-safety | skill | `.cursor/skills/voice-room-safety/SKILL.md` | антидейтинг UX, сцена/зал |
+| livekit-docs | MCP | `https://docs.livekit.io/mcp` | `@livekit/components-react` API |
+| @livekit/components-react | npm | в Lounge SPA | RoomAudioRenderer, hooks |
 
 ## CLI
 

@@ -19,9 +19,11 @@ alwaysApply: true
 
 ## Базовая команда Оркестратора
 
-Клиент, Оркестратор, Архитектор, Фронтендер, Motion, Бекендер, Тестировщик, Фиксер, Деплоер.
+Клиент, Оркестратор, Архитектор, Фронтендер, Motion, Бекендер, AI Bridge, Тестировщик, Фиксер, Деплоер, **Realtime** (LiveKit / голосовые комнаты — по chain).
 
-Профиль по умолчанию: **Sputnik Life OS + Cortana** (Flutter/React, Telegram HITL, SQLite sync, LangGraph). Контекст Cortana — skill `cortana-retrieval` (filter → vector), не отдельный агент. Motion/WebGL — только если Архитектор включил в chain.
+Профиль по умолчанию: **Sputnik Life OS + Cortana** (Flutter/React, Telegram HITL, SQLite sync, LangGraph).  
+Профиль **Vernatun Lounge**: skill `livekit-voice-rooms` + MCP `livekit-docs`; канон `liverooms/ARCHITECTURE.md`.  
+Контекст Cortana — skill `cortana-retrieval` (filter → vector), не отдельный агент. Motion/WebGL / Realtime — только если Архитектор включил в chain.
 
 ## Skill-first
 
@@ -30,7 +32,7 @@ alwaysApply: true
 2. `SKILL.md` из `.cursor/skills/`
 3. плагины `plugins/<role>/` если есть
 4. оболочку `knowledge/engineering/roles/<role>.md`
-5. `knowledge/area_sputnik/` **текущего** проекта — домен Cortana/Sputnik
+5. `knowledge/area_sputnik/` — домен Cortana/Sputnik; для Lounge — `knowledge/area_vernatun_lounge/`
 6. толстые `knowledge/engineering/sources/` — только если скилла мало
 
 Не открывать все PDF/sources «на всякий случай».

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Кабинет владельца — Кампус Вернатун</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="top">
+        <p class="brand">Кампус · кабинет владельца</p>
+        <p class="sub">
+          Жалобы участников · сигналы роботов и mute/kick · баны — только для
+          вас
+        </p>
+      </header>
+
+      <section id="login" class="card login-card">
+        <h1>Вход</h1>
+        <p class="lead">
+          Пароль задаётся на сервере (<code>LOUNGE_OWNER_PASSWORD</code>).
+        </p>
+        <label class="field">
+          <span>Пароль</span>
+          <input id="password" type="password" autocomplete="current-password" />
+        </label>
+        <p id="login-error" class="error" hidden></p>
+        <button id="login-btn" class="btn-primary" type="button">Открыть список</button>
+      </section>
+
+      <section id="inbox" class="inbox" hidden>
+        <div class="inbox-toolbar">
+          <h1 id="panel-title">Жалобы</h1>
+          <div class="inbox-actions">
+            <button
+              id="robots-help-btn"
+              class="btn-ghost robots-help-btn"
+              type="button"
+              hidden
+              title="Как работают роботы модерации"
+            >
+              ?
+            </button>
+            <button id="refresh-btn" class="btn-ghost" type="button">Обновить</button>
+            <button id="logout-btn" class="btn-ghost" type="button">Выйти</button>
+          </div>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Разделы кабинета">
+          <button
+            type="button"
+            class="tab is-active"
+            id="tab-reports"
+            role="tab"
+            aria-selected="true"
+            data-tab="reports"
+          >
+            Жалобы
+          </button>
+          <button
+            type="button"
+            class="tab"
+            id="tab-moderation"
+            role="tab"
+            aria-selected="false"
+            data-tab="moderation"
+          >
+            Модерация
+          </button>
+          <button
+            type="button"
+            class="tab"
+            id="tab-bans"
+            role="tab"
+            aria-selected="false"
+            data-tab="bans"
+          >
+            Баны
+          </button>
+          <button
+            type="button"
+            class="tab"
+            id="tab-settings"
+            role="tab"
+            aria-selected="false"
+            data-tab="settings"
+          >
+            Настройки
+          </button>
+        </div>
+
+        <!-- C-238: reserved chrome height so tabs don't jump -->
+        <div class="list-chrome" id="list-chrome">
+          <div class="list-tools" id="list-tools">
+            <label class="tool-field tool-search">
+              <span>Поиск</span>
+              <input
+                id="search-input"
+                type="search"
+                placeholder="Имя, IP, комната, текст…"
+                autocomplete="off"
+              />
+            </label>
+            <label class="tool-field">
+              <span>Сортировка</span>
+              <select id="sort-select" class="vernatun-select">
+                <option value="date_desc">Сначала новые</option>
+                <option value="date_asc">Сначала старые</option>
+                <option value="name_asc">Имя А→Я</option>
+                <option value="name_desc">Имя Я→А</option>
+                <option value="ip_asc">IP А→Я</option>
+              </select>
+            </label>
+            <label class="tool-field">
+              <span>Фильтр</span>
+              <select id="filter-select" class="vernatun-select">
+                <option value="all">Все</option>
+                <option value="has_ip">С IP</option>
+                <option value="has_client">С client id</option>
+                <option value="today">За сегодня</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="purge-bar" id="purge-bar">
+            <label class="master-check" title="Выбрать все видимые">
+              <input id="select-all" type="checkbox" />
+              <span class="master-check-box" aria-hidden="true"></span>
+              <span class="master-check-label">Все</span>
+            </label>
+
+            <div class="purge-menu-wrap" id="purge-menu-wrap">
+              <button id="purge-btn" class="btn-ghost" type="button" aria-haspopup="true" aria-expanded="false">
+                Удалить по правилу
+                <span class="purge-caret" aria-hidden="true"></span>
+              </button>
+              <div class="purge-menu" id="purge-menu" hidden role="menu">
+                <button type="button" class="purge-menu-item" id="purge-by-age-btn" role="menuitem">
+                  Удалить по сроку
+                </button>
+                <div class="purge-menu-days" id="purge-menu-days" hidden>
+                  <label class="purge-days-inline">
+                    <span>Старше (дней)</span>
+                    <input id="purge-days-inline" type="number" min="0" step="1" placeholder="30" />
+                  </label>
+                  <button type="button" class="btn-primary btn-sm" id="purge-days-go">
+                    Удалить
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <button id="delete-selected-btn" class="btn-danger" type="button" hidden>
+              Удалить выбранные
+            </button>
+
+            <button id="purge-all-btn" class="btn-danger" type="button">
+              Очистить раздел
+            </button>
+          </div>
+        </div>
+
+        <!-- C-239 / C-245: robot filters — reserved slot on list tabs, fully gone on settings -->
+        <div class="robot-filters-slot" id="robot-filters-slot">
+          <div
+            class="robot-filters"
+            id="robot-filters"
+            hidden
+            role="toolbar"
+            aria-label="Фильтр по роботам"
+          >
+            <button type="button" class="robot-filter-btn is-active" data-robot="all">
+              Все <span class="robot-filter-count" data-count-for="all">0</span>
+            </button>
+            <button
+              type="button"
+              class="robot-filter-btn"
+              data-robot="politic"
+              title="Политика / агитация"
+            >
+              Политика <span class="robot-filter-count" data-count-for="politic">0</span>
+            </button>
+            <button
+              type="button"
+              class="robot-filter-btn"
+              data-robot="censor"
+              title="Тон / оскорбления"
+            >
+              Тон <span class="robot-filter-count" data-count-for="censor">0</span>
+            </button>
+            <button
+              type="button"
+              class="robot-filter-btn"
+              data-robot="nsfw"
+              title="18+ / непристойности"
+            >
+              18+ <span class="robot-filter-count" data-count-for="nsfw">0</span>
+            </button>
+            <button
+              type="button"
+              class="robot-filter-btn"
+              data-robot="hate"
+              title="Ненависть / этничность · границы · знакомства · религия"
+            >
+              Границы <span class="robot-filter-count" data-count-for="hate">0</span>
+            </button>
+            <button
+              type="button"
+              class="robot-filter-btn"
+              data-robot="shield"
+              title="Спам · мошенничество"
+            >
+              Спам <span class="robot-filter-count" data-count-for="shield">0</span>
+            </button>
+          </div>
+        </div>
+
+        <p id="status-msg" class="status-msg" hidden></p>
+        <p id="list-empty" class="empty" hidden>Пока пусто.</p>
+
+        <div class="panel-body" id="panel-body">
+          <div class="inbox-layout" id="inbox-layout">
+            <div class="list-scroll" id="list-scroll">
+              <ul id="list" class="list" role="list"></ul>
+            </div>
+            <article id="detail" class="detail card" hidden>
+              <p class="detail-kind" id="detail-kind"></p>
+              <h2 id="detail-title"></h2>
+              <p class="detail-meta" id="detail-meta"></p>
+              <div class="detail-parties" id="detail-parties" hidden></div>
+              <div class="detail-evidence" id="detail-evidence" hidden>
+                <p class="detail-evidence-label">Скрин комнаты / доски</p>
+                <img
+                  id="detail-evidence-img"
+                  alt="Скрин к жалобе"
+                  title="Нажмите, чтобы увеличить"
+                />
+                <div id="detail-evidence-mock" class="evidence-mock" hidden>
+                  МОКАП скрин доски
+                </div>
+              </div>
+              <div class="detail-body" id="detail-body"></div>
+              <div class="detail-actions" id="detail-actions"></div>
+              <pre class="detail-raw" id="detail-raw" hidden></pre>
+            </article>
+          </div>
+
+          <section id="settings-panel" class="settings-panel" hidden>
+            <p class="settings-help">
+              Для каждого робота откройте «Ключевые слова» или «Шаблоны» —
+              правка в большом окне. После правок нажмите «Сохранить образцы»,
+              чтобы записать всё на сервер.
+            </p>
+            <div id="settings-forms" class="settings-forms"></div>
+            <div class="settings-actions">
+              <button id="settings-save-btn" class="btn-primary" type="button">
+                Сохранить образцы
+              </button>
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+
+    <!-- C-238: evidence lightbox -->
+    <div
+      id="evidence-lightbox"
+      class="evidence-lightbox-backdrop"
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-label="Увеличенный скрин"
+    >
+      <button
+        type="button"
+        class="evidence-lightbox-close"
+        id="evidence-lightbox-close"
+        aria-label="Закрыть"
+      >
+        ×
+      </button>
+      <img id="evidence-lightbox-img" alt="Увеличенный скрин улики" />
+    </div>
+
+    <div id="robots-help-modal" class="robots-help-backdrop" hidden>
+      <div
+        class="robots-help-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="robots-help-title"
+      >
+        <button type="button" class="robots-help-close" id="robots-help-close" aria-label="Закрыть">
+          ×
+        </button>
+        <h2 id="robots-help-title">Сентинелы модерации Кампуса</h2>
+        <p class="robots-help-lead">
+          Пять сентинелов (Политика · Тон · 18+ · Границы · Спам). Автоматы
+          только фиксируют улику и убирают контент; блокировку выдаёт владелец.
+          Пока без бана: только фиксация + удаление + инцидент в кабинет.
+        </p>
+        <article class="robot-card">
+          <h3>Политика / агитация</h3>
+          <p>
+            Ловит политическую агитацию, пропаганду и геополитические провокации
+            в чате и на доске; фиксирует улику, убирает контент, не наказывает сам.
+          </p>
+        </article>
+        <article class="robot-card">
+          <h3>Тон / оскорбления</h3>
+          <p>
+            Ловит мат, оскорбления, травлю и агрессивные выпады в чате
+            (стоп-слова и шаблоны фраз, RU/EN/HY).
+          </p>
+        </article>
+        <article class="robot-card">
+          <h3>18+ / непристойности</h3>
+          <p>
+            Ловит эротику / порно / обнажение на доске и в подписях к рисункам;
+            улика — снимок фигуры, без записи каждого штриха.
+          </p>
+        </article>
+        <article class="robot-card">
+          <h3>Спам</h3>
+          <p>
+            Ловит спам, рекламу, подозрительные ссылки, мошенничество и вандализм
+            быстрыми штрихами на доске.
+          </p>
+        </article>
+        <article class="robot-card">
+          <h3>Ненависть / этничность (границы)</h3>
+          <p>
+            Ловит хейт и этнические выпады, домогательства / флирт после «стоп»,
+            религию как травлю, утечку чужих контактов и персональных данных без
+            согласия. Отдельно: запрет контента про несовершеннолетних.
+          </p>
+        </article>
+        <button type="button" class="btn-primary" id="robots-help-ok">Понятно</button>
+      </div>
+    </div>
+
+    <!-- C-247: sentinel sample field editor -->
+    <div
+      id="settings-editor-modal"
+      class="settings-editor-backdrop"
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="settings-editor-title"
+    >
+      <div class="settings-editor-card">
+        <button
+          type="button"
+          class="settings-editor-close"
+          id="settings-editor-close"
+          aria-label="Закрыть"
+        >
+          ×
+        </button>
+        <h2 id="settings-editor-title">Редактор</h2>
+        <p id="settings-editor-hint" class="settings-editor-hint"></p>
+        <textarea
+          id="settings-editor-textarea"
+          class="settings-editor-textarea"
+          rows="16"
+          spellcheck="false"
+        ></textarea>
+        <div class="settings-editor-actions">
+          <button type="button" class="btn-ghost" id="settings-editor-cancel">
+            Отмена
+          </button>
+          <button type="button" class="btn-primary" id="settings-editor-save">
+            Сохранить
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>

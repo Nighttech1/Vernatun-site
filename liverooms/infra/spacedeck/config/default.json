@@ -1,0 +1,38 @@
+{
+  "team_name": "Vernatun Campus",
+  "contact_email": "support@vernatun.local",
+
+  "host": "::",
+  "port": 9666,
+  "endpoint": "http://127.0.0.1:9666",
+  "invite_code": "vernatun-local",
+
+  "storage_dialect": "sqlite",
+
+  "storage_host": "localhost",
+  "storage_database": "spacedeck",
+  "storage_username": "username",
+  "storage_password": "password",
+
+  "storage_local_path": "./storage",
+  "storage_local_db": "./database/database.sqlite",
+  "storage_region": "eu-central-1",
+  "storage_endpoint": "http://localhost:4572",
+  "storage_bucket": "vernatun_spacedeck",
+  "storage_cdn": "/storage",
+
+  "mongodb_host": "localhost",
+  "redis_mock": true,
+  "redis_host": "localhost",
+
+  "export_api_secret": "vernatun_export_local",
+
+  "mail_provider": "console",
+  "mail_smtp_host": "localhost",
+  "mail_smtp_port": 25,
+  "mail_smtp_secure": false,
+  "mail_smtp_require_tls": false,
+  "mail_smtp_user": "",
+  "mail_smtp_pass": "",
+  "spacedeck": {}
+}

@@ -1,0 +1,71 @@
+/* Shared button utilities referenced across lobby + room */
+
+.campus-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--brand-terracotta);
+  border: none;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 4px 14px rgba(194, 94, 40, 0.25);
+  transition: background 0.15s ease;
+  text-decoration: none;
+}
+
+.campus-btn-primary:hover:not(:disabled) {
+  background: var(--brand-terracotta-dark);
+}
+
+.campus-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.campus-btn-on-azure {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #ffffff !important;
+  background: #111111 !important;
+  border: none;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 4px 14px rgba(17, 17, 17, 0.28);
+  transition: background 0.15s ease, opacity 0.15s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.campus-btn-on-azure:hover {
+  background: var(--brand-terracotta) !important;
+  color: #ffffff !important;
+}
+
+.campus-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--brand-azure);
+  background: #fff;
+  border: 1px solid var(--brand-border);
+  border-radius: var(--radius-xl);
+  transition: background 0.15s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.campus-btn-secondary:hover:not(:disabled) {
+  background: var(--brand-cream);
+}

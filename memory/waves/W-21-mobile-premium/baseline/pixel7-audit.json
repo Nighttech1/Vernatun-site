@@ -1,0 +1,28 @@
+{
+  "metrics": {
+    "before": 0,
+    "mid": 789,
+    "overflowX": false,
+    "sw": 412,
+    "cw": 412,
+    "bodyOverflow": "visible"
+  },
+  "touchAudit": [
+    {
+      "tag": "DIV",
+      "id": "",
+      "cls": "circular-sticky",
+      "touchAction": "none",
+      "w": 324,
+      "h": 654
+    },
+    {
+      "tag": "DIV",
+      "id": "",
+      "cls": "circular-stage",
+      "touchAction": "none",
+      "w": 324,
+      "h": 654
+    }
+  ]
+}

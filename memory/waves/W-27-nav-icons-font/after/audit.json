@@ -1,0 +1,164 @@
+{
+  "menu": {
+    "sections": [
+      {
+        "t": "О нас",
+        "u": "underline"
+      },
+      {
+        "t": "Расписание",
+        "u": "underline"
+      },
+      {
+        "t": "Учебные материалы",
+        "u": "underline"
+      },
+      {
+        "t": "Статьи",
+        "u": "underline"
+      },
+      {
+        "t": "Контакты",
+        "u": "underline"
+      }
+    ],
+    "links": [
+      {
+        "t": "О клубе",
+        "u": "none"
+      },
+      {
+        "t": "Форматы встреч",
+        "u": "none"
+      },
+      {
+        "t": "Атмосфера",
+        "u": "none"
+      },
+      {
+        "t": "FAQ",
+        "u": "none"
+      },
+      {
+        "t": "Все статьи",
+        "u": "none"
+      },
+      {
+        "t": "Если стесняешься говорить",
+        "u": "none"
+      },
+      {
+        "t": "Как проходит встреча",
+        "u": "none"
+      },
+      {
+        "t": "Какой армянский мы говорим",
+        "u": "none"
+      },
+      {
+        "t": "Как с нами связаться",
+        "u": "none"
+      },
+      {
+        "t": "Чат клуба",
+        "u": "none"
+      },
+      {
+        "t": "Канал клуба",
+        "u": "none"
+      },
+      {
+        "t": "Бот записи",
+        "u": "none"
+      }
+    ]
+  },
+  "iphone15": {
+    "issues": [],
+    "fontOk": {
+      "faces": [
+        "Century Gothic:loaded",
+        "Century Gothic:loaded",
+        "Century Gothic:loaded",
+        "CenturyGothic:unloaded",
+        "CenturyGothic:unloaded",
+        "CenturyGothic:unloaded"
+      ],
+      "loaded": true,
+      "body": "\"Century Gothic\", CenturyGothic, sans-serif",
+      "check": true
+    },
+    "footer": [
+      {
+        "t": "О нас",
+        "u": "underline"
+      },
+      {
+        "t": "Расписание",
+        "u": "underline"
+      },
+      {
+        "t": "Учебные материалы",
+        "u": "underline"
+      },
+      {
+        "t": "Статьи",
+        "u": "underline"
+      },
+      {
+        "t": "Контакты",
+        "u": "underline"
+      }
+    ],
+    "icons": {
+      "dancePaths": 7,
+      "volleyPaths": 5,
+      "danceSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"r",
+      "volleySvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\""
+    }
+  },
+  "desktop": {
+    "issues": [],
+    "fontOk": {
+      "faces": [
+        "Century Gothic:loaded",
+        "Century Gothic:loaded",
+        "Century Gothic:loaded",
+        "CenturyGothic:unloaded",
+        "CenturyGothic:unloaded",
+        "CenturyGothic:unloaded"
+      ],
+      "loaded": true,
+      "body": "\"Century Gothic\", CenturyGothic, sans-serif",
+      "check": true
+    },
+    "footer": [
+      {
+        "t": "О нас",
+        "u": "underline"
+      },
+      {
+        "t": "Расписание",
+        "u": "underline"
+      },
+      {
+        "t": "Учебные материалы",
+        "u": "underline"
+      },
+      {
+        "t": "Статьи",
+        "u": "underline"
+      },
+      {
+        "t": "Контакты",
+        "u": "underline"
+      }
+    ],
+    "icons": {
+      "dancePaths": 7,
+      "volleyPaths": 5,
+      "danceSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"r",
+      "volleySvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\""
+    }
+  }
+}

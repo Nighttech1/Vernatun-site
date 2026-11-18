@@ -1,0 +1,19 @@
+{
+  "info": {
+    "headerKids": 8570,
+    "sections": [
+      "film-hero",
+      "club",
+      "formats",
+      "atmosphere",
+      "faq"
+    ],
+    "cssLoaded": 3,
+    "bodyText": "ВЕРНАТУН\nО нас\nРасписание\nУчебные материалы\nСтатьи\nКонтакты\nПрисоединиться\n\nДом — это не точка на карте, а круг своих людей.\n\nВернатун\nармянский разговорный клуб\nО нашем клубе\n\nВернатун — уютное прост",
+    "computedBg": "rgb(249, 246, 240)",
+    "filmH": 900
+  },
+  "errors": [
+    "page:tailwind is not defined"
+  ]
+}

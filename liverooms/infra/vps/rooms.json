@@ -1,0 +1,12 @@
+[
+  {"id": "mansarda", "title": "Мансарда поэтов с Каскада", "cefr": "any", "description": "Поэзия, образы и неспешный разговор", "locked": false},
+  {"id": "ara-uvazhaesh", "title": "Ара, ты меня уважаешь?", "cefr": "any", "description": "Живые диалоги и дружеский спор", "locked": false},
+  {"id": "babushka-tarelka", "title": "Бабушка несет третью тарелку", "cefr": "any", "description": "Домашние истории и тёплая болтовня", "locked": false},
+  {"id": "bufet-anush", "title": "Буфет тети Ануш", "cefr": "any", "description": "Кухня, рецепты и сплетни по-доброму", "locked": false},
+  {"id": "shashlyk", "title": "Ждем, пока остынет шашлык", "cefr": "any", "description": "Неспешный эфир, пока мясо «отдыхает»", "locked": false},
+  {"id": "leninakan", "title": "В Ленинакане воздух чище", "cefr": "any", "description": "Гюмри, ностальгия и городские байки", "locked": false},
+  {"id": "lozha-erevan", "title": "Ложа ночного Еревана", "cefr": "any", "description": "Ночной город, музыка и разговоры", "locked": false},
+  {"id": "glendale", "title": "Звонок дяде в Глендейл", "cefr": "any", "description": "Диаспора, звонки и новости из LA", "locked": false},
+  {"id": "diaspora", "title": "Медленнее, я из диаспоры!", "cefr": "any", "description": "Медленный темп для тех, кто учит язык заново", "locked": false},
+  {"id": "jan-kofe", "title": "Джан, заходи, кофе будешь?", "cefr": "any", "description": "Уютный вход: кофе и лёгкий small talk", "locked": false}
+]

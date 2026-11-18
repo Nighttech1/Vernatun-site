@@ -1,0 +1,12 @@
+# Vernatun Lounge — scrape LiveKit metrics (localhost)
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: livekit
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["livekit:6789"]
+        labels:
+          service: vernatun-livekit

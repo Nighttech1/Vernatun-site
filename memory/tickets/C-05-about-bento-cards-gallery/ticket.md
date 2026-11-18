@@ -1,0 +1,11 @@
+### [C-05] Раздел «О нас»: bento + card-21 + circular gallery
+- **Зона / Экран:** about.html (+ очистка index от чужих блоков)
+- **Факт:** блок «О нас» обычными карточками; форматы без tilt-card; атмосфера — простой карусель; на index ещё есть календарь, материалы, статьи
+- **Ожидание:**
+  - О нас → https://21st.dev/@larsen66/components/bento-monochrome-1 + цвета бренда
+  - Форматы → https://21st.dev/@ravikatiyar162/components/card-21 + наши картинки/цвета
+  - Атмосфера → https://21st.dev/@ravikatiyar162/components/circular-gallery + gallery/*
+  - Расписание, материалы, статьи **не** в разделе «О нас» / не дублировать на index
+- **Приоритет:** P0
+- **Скрин-улика:** after localhost about
+- **Зона:** Frontend (+ Motion для gallery, если нужно)

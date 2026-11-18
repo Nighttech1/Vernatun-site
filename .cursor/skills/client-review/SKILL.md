@@ -11,17 +11,18 @@ description: >-
 
 ## Skill-first
 
-1. Этот файл + [remarks-to-orchestrator.md](remarks-to-orchestrator.md) + [report-template.md](report-template.md)
+1. Этот файл + [remarks-to-orchestrator.md](remarks-to-orchestrator.md) + [report-template.md](report-template.md) + **[mobile-qa.md](mobile-qa.md)**
 2. Визуал сайтов: `.cursor/skills/web-visual-critic/SKILL.md`
 3. Тикеты: `.cursor/skills/ticket-engine/SKILL.md`
 4. Анти-slop: `taste-skill` (запреты)
+5. Mobile layout/touch чеклисты (read-only): `responsive-mobile-web`, `mobile-touch-scroll`
 
 ## Workflow
 
 1. Живой localhost (иначе верни Деплоеру).
-2. Playwright screenshot 1440 и 390; проскролль главы, не только hero.
-3. Тикеты `C-*` в `memory/` — любое число; Оркестратор берёт макс. 3 за проход.
-4. Закрытие: симптом исчез + `guards.md` + строка в [regression-guards.md](regression-guards.md) + для визуала Image Diff.
+2. Desktop: Playwright `playwright` 1440. Mobile: **`playwright-iphone` + `playwright-android`**; проскролль главы пальцем, не только hero.
+3. Тикеты `C-*` в `memory/` — любое число; Оркестратор берёт волну по P0→P1→P2 без потолка в 3.
+4. Закрытие: симптом исчез + `guards.md` + строка в [regression-guards.md](regression-guards.md) + для визуала Image Diff (+ mobile after-скрин).
 5. Отчёт пользователю по шаблону. Слово **согласовано** — только когда очередь пуста.
 
 | Tag | Meaning |
@@ -41,6 +42,12 @@ description: >-
 - Hover elevate: карточка **не клипится** сферой/панелью, если ТЗ просит выход наружу.
 - Scroll Path/Habits: нет видимого jank; иначе C-* P0/P1 на motion.
 - Charts: шкала и tooltip по ТЗ; иначе не закрывать.
+
+Перед «ПРИНЯТО» на premium landing mobile — ритуал [mobile-qa.md](mobile-qa.md):
+
+- Нет горизонтального скролла на iPhone/Android MCP.
+- Палец листает плавно; интерактивные скролл-сцены не блокируют жест.
+- CTA/тип доступны; сетка в одну колонку.
 
 Самоприёмка автором кода запрещена. DOM-assert ≠ визуальная приёмка.
 

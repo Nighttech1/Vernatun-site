@@ -3,136 +3,125 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Календарь встреч клуба Вернатун на сентябрь 2026: разговорный, этника и волейбол." />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="Твой армянский дом посреди города: практикуем язык за чашкой чая в камерных группах, играем в настолки, занимаемся спортом и находим близких по духу людей" />
+  <meta name="description" content="Твой армянский дом посреди города: практикуем язык за чашкой чая в камерных группах, играем в настолки, занимаемся спортом и находим близких по духу людей" />
   <title>Расписание — Вернатун</title>
-  <link rel="canonical" href="https://vernatunspeakclub.com/schedule.html" />
-  <script src="/js/tailwind-config.js"></script>
+  <link rel="canonical" href="https://vernatunspeakclub.com/schedule" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/js/tailwind-config.js?v=20260920a"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/site.css" />
+  <link rel="preload" href="/fonts/CenturyGothic.ttf?v=20260920a" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="/fonts/CenturyGothic-Bold.ttf?v=20260920a" as="font" type="font/ttf" crossorigin />
+  <link rel="stylesheet" href="/css/site.css?v=20260920a" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192.png" />
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
 </head>
-<body class="paper-grain min-h-screen antialiased text-ink" x-data="lightbox()" @keydown.escape.window="close()">
+<body class="paper-grain min-h-screen antialiased text-azure" x-data="lightbox()" @keydown.escape.window="close()">
   <div id="site-header"></div>
-  <script src="/js/site.js"></script>
+  <script src="/js/site.js?v=20260928a"></script>
   <main>
-    <!-- Расписание -->
     <section id="calendar" class="py-16 sm:py-20">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6">
         <div class="reveal text-center sm:text-left">
           <h1 class="font-display text-3xl font-bold text-azure sm:text-4xl">Расписание</h1>
-          <p class="mt-2 max-w-2xl text-ink/70">Сентябрь 2026. Нажмите цветную полоску в календаре — справа появится карточка этой встречи.</p>
+          <p class="mt-2 max-w-2xl text-azure/75">Живые встречи каждую неделю. Нажмите на событие, чтобы открыть детали.</p>
         </div>
 
-        <div class="reveal mt-10 grid items-start gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(17rem,22rem)]" x-data="clubCalendar()" x-cloak>
+        <div class="reveal mt-10 grid items-stretch gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(22.5rem,28.5rem)]" x-data="clubCalendar()" x-cloak>
           <div class="overflow-hidden rounded-xl border border-azure/12 bg-white shadow-card">
             <div class="flex flex-wrap items-center justify-between gap-3 border-b border-mist bg-parchment/60 px-4 py-3 sm:px-5">
               <div class="flex items-center gap-2">
-                <button type="button" @click="prevMonth()" class="rounded-full p-2 text-azure transition hover:bg-azure/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-sungold" aria-label="Предыдущий месяц">
+                <button type="button" @click="prevMonth()" class="cal-month-nav inline-flex size-11 items-center justify-center rounded-full text-azure transition hover:bg-azure/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-sungold" aria-label="Предыдущий месяц">
                   <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                 </button>
-                <button type="button" @click="nextMonth()" class="rounded-full p-2 text-azure transition hover:bg-azure/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-sungold" aria-label="Следующий месяц">
+                <button type="button" @click="nextMonth()" class="cal-month-nav inline-flex size-11 items-center justify-center rounded-full text-azure transition hover:bg-azure/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-sungold" aria-label="Следующий месяц">
                   <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </button>
                 <h3 class="font-display text-xl font-bold text-azure sm:text-2xl" x-text="title"></h3>
               </div>
-              <div class="flex flex-wrap items-center gap-3 text-[11px] text-ink/65">
-                <span class="inline-flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-azure"></span>Разговорный</span>
-                <span class="inline-flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-sungold"></span>Этника</span>
-                <span class="inline-flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-terracotta"></span>Волейбол</span>
-              </div>
             </div>
 
-            <div class="grid grid-cols-7 border-b border-mist bg-white/80 text-center text-[11px] font-semibold uppercase tracking-wider text-ink/50 sm:text-xs">
+            <div class="cal-legend border-b border-mist bg-parchment/40 px-4 py-3 sm:px-5" aria-label="Легенда событий">
+              <ul class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 sm:justify-start">
+                <li class="cal-legend-item">
+                  <span class="cal-legend-swatch cal-legend-swatch--talk" aria-hidden="true"></span>
+                  <span>Разговорный клуб</span>
+                </li>
+                <li class="cal-legend-item">
+                  <span class="cal-legend-swatch cal-legend-swatch--dance" aria-hidden="true"></span>
+                  <span>Танцы</span>
+                </li>
+                <li class="cal-legend-item">
+                  <span class="cal-legend-swatch cal-legend-swatch--volleyball" aria-hidden="true"></span>
+                  <span>Волейбол</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="grid grid-cols-7 border-b border-mist bg-white/80 text-center text-[11px] font-semibold uppercase tracking-wider text-azure/50 sm:text-xs">
               <template x-for="day in weekDays" :key="day">
                 <div class="border-r border-mist/80 py-2 last:border-r-0" x-text="day"></div>
               </template>
             </div>
 
-            <div class="grid grid-cols-7 bg-mist/40">
-              <template x-for="(week, wi) in weeks" :key="wi">
-                <template x-for="(cell, di) in week" :key="wi + '-' + di">
-                  <button
-                    type="button"
+            <div class="grid grid-cols-7 bg-mist/40 cal-month-grid">
+              <template x-for="cell in flatCells" :key="cell.key">
+                  <div
                     class="cal-cell cal-day border-b border-r border-mist/80 bg-white p-1 text-left last:border-r-0 sm:p-1.5"
-                    :class="[
-                      cell.inMonth ? '' : 'bg-parchment/50',
-                      cell.hasSelection ? 'is-selected' : '',
-                      cell.events.length ? 'cursor-pointer hover:bg-parchment/80' : 'cursor-default'
-                    ]"
-                    :aria-label="cell.events.length ? ('Встречи ' + cell.date) : ('День ' + cell.date)"
-                    @click="selectDay(cell)"
+                    :class="cell.inMonth ? '' : 'bg-parchment/50'"
                   >
                     <span
-                      class="inline-flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold sm:text-sm"
-                      :class="cell.isToday ? 'bg-azure text-white' : (cell.inMonth ? 'text-ink' : 'text-ink/35')"
+                      class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold sm:text-sm"
+                      :class="cell.isToday ? 'bg-azure text-white' : (cell.inMonth ? 'text-azure' : 'text-azure/35')"
                       x-text="cell.date"
                     ></span>
-                    <div class="mt-2 flex flex-col gap-1">
+                    <div class="cal-day-events mt-1.5 flex flex-col items-center gap-1">
                       <template x-for="ev in cell.events" :key="ev.id">
-                        <span
-                          class="event-bar block w-full"
-                          :class="barClass(ev.kind, selectedId === ev.id)"
-                          :title="ev.time + ' · ' + ev.title"
-                          @click.stop="selectId(ev.id)"
-                        ></span>
+                        <button
+                          type="button"
+                          class="cal-pill"
+                          :class="pillClass(ev.kind, selectedId === ev.id)"
+                          :title="ev.time + ' В· ' + ev.title"
+                          :aria-label="ev.kindLabel + ' ' + ev.time"
+                          @click="selectId(ev.id)"
+                          x-html="pillIcon(ev.kind)"
+                        ></button>
                       </template>
                     </div>
-                  </button>
-                </template>
+                  </div>
               </template>
             </div>
           </div>
 
-          <aside class="lg:sticky lg:top-24" aria-live="polite">
+          <aside class="flex h-full min-h-full flex-col lg:sticky lg:top-24" aria-live="polite">
             <article
-              class="event-card-enter overflow-hidden rounded-xl border border-azure/12 bg-white shadow-card"
+              class="event-card-enter flex h-full min-h-full flex-col overflow-hidden rounded-xl border border-azure/12 bg-white shadow-card"
               x-show="selected"
               :key="selected ? selected.id : 'empty'"
             >
               <img
                 :src="selected && selected.image"
                 :alt="selected ? selected.title : ''"
-                class="h-48 w-full object-cover"
+                class="event-card-photo w-full object-cover"
                 width="640"
-                height="320"
+                height="480"
               />
-              <div class="space-y-3 p-5">
-                <div class="flex flex-wrap items-center gap-2">
-                  <span class="rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider" :class="kindClass(selected && selected.kind)" x-text="selected && selected.kindLabel"></span>
-                  <span class="text-xs font-semibold text-ink/60" x-text="selected && (selected.dateLabel + ' · ' + selected.time)"></span>
-                </div>
+              <div class="flex flex-1 flex-col space-y-3 p-5">
+                <p class="text-right text-xs font-semibold text-azure/65" x-text="selected && (selected.dateLabel + ' В· ' + selected.time)"></p>
                 <h3 class="font-display text-2xl leading-tight text-azure" x-text="selected && selected.title"></h3>
-                <p class="text-sm leading-relaxed text-ink/75" x-text="selected && selected.description"></p>
-                <div class="flex flex-wrap gap-2" x-show="siblings.length > 1">
-                  <template x-for="ev in siblings" :key="'sib-' + ev.id">
-                    <button
-                      type="button"
-                      class="rounded-full border px-2.5 py-1 text-[11px] font-semibold transition"
-                      :class="selectedId === ev.id ? 'border-azure bg-azure text-white' : 'border-azure/20 text-azure hover:border-azure/40'"
-                      @click="selectId(ev.id)"
-                      x-text="ev.time + ' · ' + ev.kindLabel"
-                    ></button>
-                  </template>
-                </div>
-                <a href="https://t.me/vernatunbot" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded bg-terracotta px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-terracotta/90">Записаться в Telegram</a>
+                <p class="text-sm leading-relaxed text-azure/80" x-text="selected && selected.description"></p>
               </div>
             </article>
-            <div x-show="!selected" class="rounded-xl border border-dashed border-azure/25 bg-white/70 p-6 text-sm leading-relaxed text-ink/70">
-              Выберите день с цветной полоской — здесь откроется карточка встречи.
+            <div x-show="!selected" class="rounded-xl border border-dashed border-azure/25 bg-white/70 p-6 text-sm leading-relaxed text-azure/75">
+              Выберите событие в календаре — здесь откроются детали встречи.
             </div>
           </aside>
         </div>
       </div>
     </section>
-
-
   </main>
   <div id="site-footer"></div>
   <script>VernatunChrome.mountRest();</script>

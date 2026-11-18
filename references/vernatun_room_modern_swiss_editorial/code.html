@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vernatun Room — Интерактивный воркшоп</title>
+<!-- Tailwind CSS v3 with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              terracotta: '#C25E28',
+              terracottaDark: '#9F4317',
+              terracottaLight: '#FFF4EE',
+              amber: '#D97706',
+              amberLight: '#FEF3C7',
+              navy: '#1E3A8A',
+              royal: '#2563EB',
+              slateBg: '#F8FAFC',
+              slateBorder: '#E2E8F0',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Menlo', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Styles -->
+<style data-purpose="custom-layout">
+    /* Subtle dot grid pattern for whiteboard canvas */
+    .bg-dot-grid {
+      background-color: #FFFFFF;
+      background-image: radial-gradient(#CBD5E1 1.2px, transparent 1.2px);
+      background-size: 24px 24px;
+    }
+    
+    /* Audio visualizer wave keyframe */
+    @keyframes pulseWave {
+      0%, 100% { height: 6px; }
+      50% { height: 18px; }
+    }
+    .wave-bar-1 { animation: pulseWave 1s ease-in-out infinite 0.1s; }
+    .wave-bar-2 { animation: pulseWave 0.9s ease-in-out infinite 0.25s; }
+    .wave-bar-3 { animation: pulseWave 1.1s ease-in-out infinite 0.4s; }
+    .wave-bar-4 { animation: pulseWave 0.8s ease-in-out infinite 0.15s; }
+  </style>
+<style data-purpose="marker-decorations">
+    /* Marker highlighter hand-drawn border simulation */
+    .marker-circ {
+      border: 2px dashed #C25E28;
+      border-radius: 9999px;
+      padding: 2px 10px;
+    }
+    .sticky-shadow {
+      box-shadow: 2px 6px 12px -2px rgba(15, 23, 42, 0.12);
+    }
+  </style>
+<!-- END: Custom Styles -->
+</head>
+<body class="h-full bg-brand-slateBg text-slate-900 font-sans flex flex-col overflow-hidden antialiased select-none">
+<!-- BEGIN: TopApplicationBar -->
+<header class="h-16 bg-white border-b border-brand-slateBorder px-4 flex items-center justify-between z-30 shrink-0" data-purpose="top-application-bar">
+<!-- Left Group: Exit Room, Status Badges -->
+<div class="flex items-center space-x-3">
+<button class="flex items-center space-x-1.5 px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-brand-terracotta hover:bg-brand-terracottaLight rounded-lg transition border border-transparent hover:border-brand-terracotta/20">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>Выйти</span>
+</button>
+<div class="h-5 w-[1px] bg-slate-200"></div>
+<!-- Live Broadcast Badge -->
+<div class="flex items-center space-x-2 bg-slate-50 border border-slate-200 px-2.5 py-1 rounded-full text-xs">
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
+</span>
+<span class="font-bold text-slate-800 tracking-tight">В ЭФИРЕ:</span>
+<span class="text-slate-600 truncate max-w-xs font-medium">Городской сленг и юмор (Ереван vs Гюмри)</span>
+</div>
+<!-- Meta Badges -->
+<div class="flex items-center space-x-1.5 text-xs">
+<span class="bg-brand-amberLight text-brand-amber font-mono font-bold px-2 py-0.5 rounded border border-amber-200">B1–B2</span>
+<span class="bg-slate-100 text-slate-700 font-mono font-semibold px-2 py-0.5 rounded border border-slate-200">⏱️ 34:12</span>
+<span class="bg-emerald-50 text-emerald-700 font-medium px-2 py-0.5 rounded border border-emerald-200 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          14 онлайн
+        </span>
+</div>
+</div>
+<!-- Center Workspace Navigation Tabs -->
+<nav class="hidden md:flex items-center space-x-1 bg-slate-100 p-1 rounded-xl border border-slate-200" data-purpose="workspace-tabs">
+<button class="flex items-center space-x-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-900 shadow-sm border border-slate-200/60">
+<span>🖥️</span>
+<span>Интерактивная доска</span>
+</button>
+<button class="flex items-center space-x-2 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-200/60 transition">
+<span>📑</span>
+<span>PDF-Словарь <span class="text-[10px] text-slate-400 font-mono font-normal">(Стр 3/8)</span></span>
+</button>
+<button class="flex items-center space-x-2 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-200/60 transition">
+<span>📊</span>
+<span>Опрос участников <span class="bg-brand-royal text-white text-[10px] px-1.5 rounded-full font-bold">1</span></span>
+</button>
+</nav>
+<!-- Right Controls: Mic, Camera, Stage Actions -->
+<div class="flex items-center space-x-2" data-purpose="studio-audio-controls">
+<!-- Active Mic Trigger -->
+<button class="relative flex items-center space-x-2 bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm transition">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+</span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 02-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>Микрофон ВКЛ</span>
+</button>
+<button class="p-1.5 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-lg transition" title="Демонстрация экрана">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<button class="flex items-center space-x-1.5 px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 rounded-lg text-xs font-medium transition">
+<span>✋</span>
+<span>Поднять руку</span>
+</button>
+<button class="px-2.5 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50 rounded-lg transition">
+        Завершить участие
+      </button>
+</div>
+</header>
+<!-- END: TopApplicationBar -->
+<!-- BEGIN: MainThreeColumnLayout -->
+<div class="flex-1 flex overflow-hidden">
+<!-- BEGIN: LeftStageColumn -->
+<aside class="w-[260px] bg-white border-r border-brand-slateBorder flex flex-col justify-between shrink-0" data-purpose="speakers-stage">
+<div class="p-3.5 space-y-4 overflow-y-auto">
+<!-- Section: Active Speakers -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-[11px] font-bold tracking-wider uppercase text-slate-400">Спикеры на сцене (3)</h3>
+<span class="text-[10px] font-mono text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded font-medium border border-emerald-100">Live Stage</span>
+</div>
+<div class="space-y-2">
+<!-- Speaker 1 (Host with visualizer) -->
+<div class="p-2 bg-brand-terracottaLight/40 border-2 border-brand-terracotta/40 rounded-xl flex items-center justify-between shadow-xs">
+<div class="flex items-center space-x-2.5">
+<div class="relative">
+<div class="w-9 h-9 rounded-full bg-brand-terracotta text-white flex items-center justify-center font-bold text-sm ring-2 ring-brand-terracotta/20">
+                    ԴՄ
+                  </div>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full"></span>
+</div>
+<div>
+<div class="text-xs font-bold text-slate-900 flex items-center gap-1">
+                    Давид М.
+                    <span class="bg-brand-terracotta text-white text-[9px] px-1 py-0.2 rounded font-mono font-medium">Носитель</span>
+</div>
+<div class="text-[10px] text-slate-500 font-medium">Ведущий встречи</div>
+</div>
+</div>
+<!-- Audio visualizer bars -->
+<div class="flex items-center space-x-0.5 h-5 px-1 bg-emerald-100/70 rounded">
+<span class="w-1 bg-emerald-600 rounded-full wave-bar-1"></span>
+<span class="w-1 bg-emerald-600 rounded-full wave-bar-2"></span>
+<span class="w-1 bg-emerald-600 rounded-full wave-bar-3"></span>
+<span class="w-1 bg-emerald-600 rounded-full wave-bar-4"></span>
+</div>
+</div>
+<!-- Speaker 2 -->
+<div class="p-2 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
+<div class="flex items-center space-x-2.5">
+<div class="relative">
+<div class="w-8 h-8 rounded-full bg-brand-royal text-white flex items-center justify-center font-bold text-xs">
+                    АС
+                  </div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full"></span>
+</div>
+<div>
+<div class="text-xs font-semibold text-slate-800">Арам С.</div>
+<div class="text-[10px] text-emerald-600 font-medium animate-pulse">Говорит...</div>
+</div>
+</div>
+<span class="text-slate-400">
+<svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewbox="0 0 20 20">
+<path d="M10 2a3 3 0 00-3 3v6a3 3 0 106 0V5a3 3 0 00-3-3z"></path>
+<path d="M4 11a6 6 0 0012 0h-2a4 4 0 11-8 0H4z"></path>
+</svg>
+</span>
+</div>
+<!-- Speaker 3 -->
+<div class="p-2 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
+<div class="flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-full bg-brand-amber text-white flex items-center justify-center font-bold text-xs">
+                  ԼԿ
+                </div>
+<div>
+<div class="text-xs font-semibold text-slate-800">Лилит К.</div>
+<div class="text-[10px] text-slate-400">Микрофон включен</div>
+</div>
+</div>
+<span class="text-slate-400">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 02-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</span>
+</div>
+</div>
+</div>
+<!-- Section: Listeners Grid -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-[11px] font-bold tracking-wider uppercase text-slate-400">Слушатели (11)</h3>
+<span class="text-[10px] text-slate-400">Все в сети</span>
+</div>
+<div class="grid grid-cols-4 gap-2">
+<!-- Mini participant avatars -->
+<div class="relative group flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold ring-2 ring-amber-400">
+                ТГ
+              </div>
+<span class="absolute -top-1 -right-1 text-xs">✋</span>
+<span class="text-[9px] text-slate-600 mt-1 truncate max-w-[50px]">Тигран</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-xs font-bold">
+                АН
+              </div>
+<span class="text-[9px] text-slate-600 mt-1 truncate max-w-[50px]">Ани</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-orange-100 text-orange-700 flex items-center justify-center text-xs font-bold">
+                ГР
+              </div>
+<span class="text-[9px] text-slate-600 mt-1 truncate max-w-[50px]">Грач</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-pink-100 text-pink-700 flex items-center justify-center text-xs font-bold">
+                СО
+              </div>
+<span class="text-[9px] text-slate-600 mt-1 truncate max-w-[50px]">Сона</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-cyan-100 text-cyan-700 flex items-center justify-center text-xs font-bold">
+                МГ
+              </div>
+<span class="text-[9px] text-slate-600 mt-1 truncate max-w-[50px]">Мариам</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center text-xs font-bold">
+                АК
+              </div>
+<span class="text-[9px] text-slate-600 mt-1 truncate max-w-[50px]">Армен</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-xs font-bold">
+                ЕЛ
+              </div>
+<span class="text-[9px] text-slate-600 mt-1 truncate max-w-[50px]">Елена</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-xs font-bold">
+                +4
+              </div>
+<span class="text-[9px] text-slate-500 mt-1">ещё</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Left Bottom: Audio Gain & Noise Suppression -->
+<div class="p-3 bg-slate-50 border-t border-brand-slateBorder space-y-2">
+<div class="flex items-center justify-between text-[11px]">
+<span class="text-slate-600 font-medium">Чувствительность</span>
+<span class="text-emerald-600 font-mono font-bold">82%</span>
+</div>
+<div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
+<div class="bg-emerald-500 h-1.5 rounded-full w-[82%]"></div>
+</div>
+<div class="flex items-center justify-between pt-1 text-[10px] text-slate-500">
+<span class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            Krisp Шумоподавление
+          </span>
+<span class="font-semibold text-slate-700 uppercase">ВКЛ</span>
+</div>
+</div>
+</aside>
+<!-- END: LeftStageColumn -->
+<!-- BEGIN: CenterWhiteboardWorkspace -->
+<main class="flex-1 flex flex-col relative bg-slate-100 overflow-hidden" data-purpose="collaborative-whiteboard">
+<!-- Floating Modern Whiteboard Toolbar -->
+<div class="absolute top-3 left-1/2 -translate-x-1/2 z-20 flex items-center bg-white/95 backdrop-blur shadow-md border border-slate-200 rounded-2xl px-2 py-1.5 space-x-1 text-slate-700">
+<!-- Move / Cursor -->
+<button class="p-1.5 rounded-xl hover:bg-slate-100 text-slate-500 transition" title="Выделение / Курсор">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<!-- Brush / Marker (Active) -->
+<button class="p-1.5 rounded-xl bg-brand-terracottaLight text-brand-terracotta font-semibold transition flex items-center gap-1" title="Маркер">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="w-2 h-2 rounded-full bg-brand-terracotta inline-block"></span>
+</button>
+<!-- Color Swatches -->
+<div class="flex items-center space-x-1 px-1 border-l border-r border-slate-200">
+<button class="w-4 h-4 rounded-full bg-brand-terracotta ring-2 ring-brand-terracotta/30"></button>
+<button class="w-4 h-4 rounded-full bg-brand-royal opacity-60 hover:opacity-100"></button>
+<button class="w-4 h-4 rounded-full bg-brand-amber opacity-60 hover:opacity-100"></button>
+<button class="w-4 h-4 rounded-full bg-slate-900 opacity-60 hover:opacity-100"></button>
+</div>
+<!-- Highlighter -->
+<button class="p-1.5 rounded-xl hover:bg-slate-100 text-slate-600 transition" title="Текстовыделитель">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<!-- Text Tool -->
+<button class="p-1.5 rounded-xl hover:bg-slate-100 text-slate-600 transition font-serif font-bold text-xs" title="Текст">
+          T
+        </button>
+<!-- Sticky Note -->
+<button class="p-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-800 transition" title="Стикер">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+<path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h8l6-6V5a2 2 0 00-2-2H4zm8 10v4.586L16.586 13H12z"></path>
+</svg>
+</button>
+<!-- Shape Tool -->
+<button class="p-1.5 rounded-xl hover:bg-slate-100 text-slate-600 transition" title="Фигуры">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<!-- Image / Doc Import -->
+<button class="p-1.5 rounded-xl hover:bg-slate-100 text-slate-600 transition" title="Загрузить документ или фото">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<!-- Laser pointer -->
+<button class="p-1.5 rounded-xl hover:bg-slate-100 text-rose-600 transition" title="Лазерная указка">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<div class="h-4 w-[1px] bg-slate-200"></div>
+<!-- Undo/Redo -->
+<button class="p-1.5 rounded-xl hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<button class="p-1.5 rounded-xl hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M21 10H11a8 8 0 00-8 8v2m18-10l-6 6m6-6l-6-6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+<!-- Canvas Board Work Area -->
+<div class="flex-1 bg-dot-grid overflow-auto p-8 relative flex items-center justify-center cursor-crosshair" data-purpose="canvas-content-container">
+<!-- Active Board Canvas Surface -->
+<div class="w-[960px] min-h-[580px] bg-white rounded-3xl shadow-xl border border-slate-200 p-8 relative overflow-hidden">
+<!-- Club Emblem Watermark -->
+<div class="absolute top-6 right-8 opacity-15 pointer-events-none">
+<img alt="Vernatun Logo Watermark" class="w-24 h-24 object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XshGhFj7l0sfzH28vBVYMSfQgAAzR_t1DorLJVIY4JhElq4cwPg7q08v6DH1pLxaG3zzGLL7ymvrd74GfHFvaUSb4KhqkqaEVlzmZdJIbVntdVTLm2xiyw2RQK_uLVuMxtnfBNez6Fig4CBMpVcBNRAGHd8YrUhU18lr_1DurdImH8q2-a2AERs61KOPyuRjgTCRTddXCUZWzH9vZEMKmk3JIVwtUrV549WN7m52aP3K2v46QZYyYOMr6kvhpIcc_mAjJikbr4rw"/>
+</div>
+<!-- Board Header -->
+<div class="border-b border-slate-100 pb-5 mb-6">
+<div class="inline-block bg-brand-terracottaLight text-brand-terracotta font-mono font-bold text-xs uppercase px-2.5 py-0.5 rounded-full mb-1">
+              Тема 04 • Разговорный практикум
+            </div>
+<h1 class="text-2xl font-black text-slate-900 tracking-tight flex items-baseline gap-3">
+<span>«Լսի, մի բան ասեմ...»</span>
+<span class="text-sm font-medium text-slate-500 font-mono">[Лси, ми бан асэм...]</span>
+<span class="text-sm font-normal text-brand-terracotta">«Послушай, скажу кое-что...»</span>
+</h1>
+</div>
+<!-- Comparison Grid -->
+<div class="grid grid-cols-2 gap-6 relative">
+<!-- Column 1: Yerevan Slang -->
+<div class="bg-slate-50/70 border border-slate-200 rounded-2xl p-4 space-y-3 relative">
+<div class="flex items-center justify-between border-b border-slate-200/80 pb-2">
+<h2 class="text-sm font-extrabold text-brand-navy flex items-center gap-1.5">
+<span>🏛️</span>
+<span>Ереванский вариант</span>
+</h2>
+<span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full font-mono">Столичный стиль</span>
+</div>
+<div class="space-y-2.5 text-xs">
+<!-- Slang row 1 -->
+<div class="p-2.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
+<div class="flex justify-between items-start">
+<span class="font-bold text-slate-900">Ո՞նց ես [во́нц эс]</span>
+<span class="text-[10px] text-slate-400">неформально</span>
+</div>
+<p class="text-slate-600 text-[11px] mt-0.5">«Как ты? / Как делишки?» (Сокращение от ինչպե՞ս ես)</p>
+</div>
+<!-- Slang row 2 with Hand-drawn marker circle -->
+<div class="p-2.5 bg-white rounded-xl border border-brand-terracotta/40 shadow-xs relative">
+<div class="flex justify-between items-start">
+<span class="font-bold text-slate-900">
+<span class="marker-circ text-brand-terracotta">Արա [ара]</span>
+</span>
+<span class="text-[10px] bg-amber-100 text-amber-800 font-medium px-1 rounded">экспрессия</span>
+</div>
+<p class="text-slate-600 text-[11px] mt-1">Дружеское восклицание между близкими: «Эй, брат / Слушай!»</p>
+<!-- Handwritten arrow annotation -->
+<div class="absolute -right-3 -bottom-2 bg-brand-terracotta text-white text-[9px] font-mono px-1.5 py-0.5 rounded-md shadow rotate-3">
+                    Давид: Использовать только с друзьями! ✍️
+                  </div>
+</div>
+<!-- Slang row 3 -->
+<div class="p-2.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
+<div class="flex justify-between items-start">
+<span class="font-bold text-slate-900">Մեռնեմ ջանիդ [мернем джанид]</span>
+</div>
+<p class="text-slate-600 text-[11px] mt-0.5">Буквально: «умру за твою душу» → высшая степень расположения.</p>
+</div>
+</div>
+</div>
+<!-- Column 2: Gyumri Dialect & Humor -->
+<div class="bg-brand-terracottaLight/30 border border-brand-terracotta/20 rounded-2xl p-4 space-y-3 relative">
+<div class="flex items-center justify-between border-b border-brand-terracotta/20 pb-2">
+<h2 class="text-sm font-extrabold text-brand-terracotta flex items-center gap-1.5">
+<span>🎭</span>
+<span>Гюмрийский колорит (Ленинакан)</span>
+</h2>
+<span class="text-[10px] bg-brand-terracotta text-white px-2 py-0.5 rounded-full font-mono font-semibold">Юмор и душа</span>
+</div>
+<div class="space-y-2.5 text-xs">
+<!-- Gyumri item 1 -->
+<div class="p-2.5 bg-white rounded-xl border border-brand-terracotta/30 shadow-2xs">
+<div class="flex justify-between items-start">
+<span class="font-bold text-slate-900">Ըդըգ / Ըդպես [эдыг / эдпэс]</span>
+<span class="text-[10px] text-brand-terracotta font-semibold">гюмрийский</span>
+</div>
+<p class="text-slate-600 text-[11px] mt-0.5">Вместо ереванского «այդպես» (так, таким образом).</p>
+</div>
+<!-- Gyumri item 2 -->
+<div class="p-2.5 bg-white rounded-xl border border-brand-terracotta/30 shadow-2xs">
+<div class="flex justify-between items-start">
+<span class="font-bold text-slate-900">Ցավդ տանեմ [цавт танэм]</span>
+<span class="text-[10px] text-amber-700 font-medium">фирменное</span>
+</div>
+<p class="text-slate-600 text-[11px] mt-0.5">«Заберу твою боль» — произносится с характерной доброй интонацией.</p>
+</div>
+<!-- Cultural Reference Visual Card -->
+<div class="p-2 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl flex items-center space-x-2.5">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-slate-200 shrink-0 border border-amber-300">
+<img alt="Архитектура встреч" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1W9Lj_Ct1YVloLzkhylZZZab_UKO_z0l5mN9CUnknpzVdjgY4WqmEOf8sQoKZ-45TEMuH9JzCPTdXL5Cy7LE8PNJBywmA0lNlJzC55BZcp4ibcr956ZDAbcwoLlsBii-xGNGDhmqPkwE2OAugNCPX_FpbA4rX-9edO_Ao9Z4TMTaErfO_DRhRlrRWi3GnsYh0P6mziSEXhX1A14QWfObgiEWLgcEJBslaAB3eco1SqHPHgdtXcNMOPjZwnpJzDZtqXLupepuGwMmQ"/>
+</div>
+<div class="text-[10px]">
+<div class="font-bold text-slate-900">Черный туф и кованые балконы</div>
+<div class="text-slate-600">Варпетац уличный юмор и традиция анекдотов.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Collaborative Sticky Notes Area -->
+<div class="mt-6 grid grid-cols-2 gap-4">
+<!-- Sticky Note 1: Yellow -->
+<div class="bg-amber-100/95 border-l-4 border-amber-500 p-3 rounded-r-xl sticky-shadow transform -rotate-1 relative">
+<div class="flex items-center justify-between text-[10px] text-amber-800 font-mono font-bold mb-1">
+<span>📌 ЗАМЕТКА ОТ ВЕДУЩЕГО</span>
+<span>18:14</span>
+</div>
+<p class="text-xs text-amber-950 font-medium">
+                «Ջան» [Джан] — добавляется к имени для выражения теплоты и уважения. Всегда уместно в Vernatun!
+              </p>
+</div>
+<!-- Sticky Note 2: Pink -->
+<div class="bg-rose-100/90 border-l-4 border-rose-500 p-3 rounded-r-xl sticky-shadow transform rotate-1 relative">
+<div class="flex items-center justify-between text-[10px] text-rose-800 font-mono font-bold mb-1">
+<span>❓ ВОПРОС ОТ АРАМА</span>
+<span>18:22</span>
+</div>
+<p class="text-xs text-rose-950 font-medium">
+                В чём принципиальная разница между «ինչպե՞ս ես» и «ո՞նց ես»? (Первое — нейтрально-вежливое, второе — для своих).
+              </p>
+</div>
+</div>
+<!-- Simulated Live Collaborative Cursors -->
+<!-- Cursor 1: David (Host) -->
+<div class="absolute top-44 left-[460px] pointer-events-none flex items-center space-x-1.5 transition-all">
+<svg class="w-4 h-4 text-brand-terracotta -rotate-45 drop-shadow" fill="currentColor" viewbox="0 0 20 20">
+<path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+</svg>
+<span class="bg-brand-terracotta text-white text-[10px] px-1.5 py-0.5 rounded font-mono font-medium shadow-sm flex items-center gap-1">
+              Давид (Ведущий) ✏️
+            </span>
+</div>
+<!-- Cursor 2: Aram S. -->
+<div class="absolute bottom-28 right-[180px] pointer-events-none flex items-center space-x-1.5 transition-all">
+<svg class="w-4 h-4 text-brand-royal -rotate-45 drop-shadow" fill="currentColor" viewbox="0 0 20 20">
+<path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+</svg>
+<span class="bg-brand-royal text-white text-[10px] px-1.5 py-0.5 rounded font-mono font-medium shadow-sm flex items-center gap-1">
+              Арам С. 👆
+            </span>
+</div>
+</div>
+</div>
+<!-- Bottom Canvas Status Bar -->
+<footer class="h-9 bg-white border-t border-brand-slateBorder px-4 flex items-center justify-between text-xs text-slate-500 z-10 shrink-0" data-purpose="canvas-status-bar">
+<div class="flex items-center space-x-3">
+<div class="flex items-center space-x-1 bg-slate-100 rounded px-1.5 py-0.5">
+<button class="hover:text-slate-900 font-mono font-bold">-</button>
+<span class="font-mono text-[11px] font-semibold text-slate-700 px-1">100%</span>
+<button class="hover:text-slate-900 font-mono font-bold">+</button>
+</div>
+<span class="h-3 w-[1px] bg-slate-200"></span>
+<span class="flex items-center gap-1 text-[11px]">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            Панорамирование (Пробел + Drag)
+          </span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-[11px] text-slate-600 font-medium">12 участников могут одновременно редактировать доску</span>
+</div>
+</footer>
+</main>
+<!-- END: CenterWhiteboardWorkspace -->
+<!-- BEGIN: RightInteractivePanel -->
+<aside class="w-[320px] bg-white border-l border-brand-slateBorder flex flex-col justify-between shrink-0" data-purpose="right-chat-and-vocab">
+<!-- Right Header Tabs -->
+<div class="border-b border-brand-slateBorder" data-purpose="chat-tabs">
+<div class="grid grid-cols-3 p-1 text-center font-medium text-xs">
+<button class="py-2 font-bold text-brand-terracotta border-b-2 border-brand-terracotta">Чат (19)</button>
+<button class="py-2 text-slate-500 hover:text-slate-800">Словарь</button>
+<button class="py-2 text-slate-500 hover:text-slate-800">Файлы (4)</button>
+</div>
+</div>
+<!-- Live Vocabulary Pinned Widget -->
+<div class="p-3 bg-gradient-to-r from-amber-50 to-orange-50/70 border-b border-amber-200/80">
+<div class="flex items-center justify-between text-[10px] font-mono font-bold text-amber-800 mb-1">
+<span class="flex items-center gap-1">
+<span>✨</span>
+            СЛОВО ЭФИРА
+          </span>
+<span class="text-amber-600 bg-amber-100 px-1 rounded">B1 Актив</span>
+</div>
+<div class="text-xs font-bold text-slate-900">
+          Զրուցել <span class="font-normal text-slate-600 font-mono">[зруце́л]</span>
+</div>
+<div class="text-[11px] text-slate-700 mt-0.5">
+          Беседовать, вести душевный диалог (синоним: խոսել).
+        </div>
+</div>
+<!-- Live Chat Stream Messages -->
+<div class="flex-1 p-3.5 overflow-y-auto space-y-3.5 text-xs" data-purpose="chat-messages-container">
+<!-- Host Message -->
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-bold text-brand-terracotta flex items-center gap-1">
+              Давид М.
+              <span class="bg-brand-terracotta/10 text-brand-terracotta text-[9px] px-1 rounded font-normal font-mono">Ведущий</span>
+</span>
+<span class="text-[10px] font-mono text-slate-400">18:05</span>
+</div>
+<div class="bg-slate-100 p-2.5 rounded-2xl rounded-tl-sm text-slate-800 leading-relaxed border border-slate-200/60">
+            Բարի երեկո, ընկերներ! Приветствуем всех на практикуме. Сегодня разберем тонкости живой разговорной речи.
+          </div>
+</div>
+<!-- Participant Message: Aram -->
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-bold text-brand-royal flex items-center gap-1">
+              Арам С.
+              <span class="bg-blue-50 text-brand-royal text-[9px] px-1 rounded font-normal font-mono">B1</span>
+</span>
+<span class="text-[10px] font-mono text-slate-400">18:09</span>
+</div>
+<div class="bg-blue-50/70 p-2.5 rounded-2xl rounded-tl-sm text-slate-800 leading-relaxed border border-blue-100">
+            Шат хетакеркир э! А как гюмрийцы обычно подшучивают друг над другом при первой встрече?
+          </div>
+</div>
+<!-- Participant Message: Lilit -->
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-bold text-amber-700 flex items-center gap-1">
+              Лилит К.
+              <span class="bg-amber-50 text-amber-800 text-[9px] px-1 rounded font-normal font-mono">B2</span>
+</span>
+<span class="text-[10px] font-mono text-slate-400">18:12</span>
+</div>
+<div class="bg-amber-50/60 p-2.5 rounded-2xl rounded-tl-sm text-slate-800 leading-relaxed border border-amber-100">
+            Сейчас напишу в чат гюмрийскую присказку! Они всегда говорят с прищуром и улыбкой: «Մեր քաղքի մարդիկ...» 😊
+          </div>
+</div>
+<!-- Tigran Question -->
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-bold text-slate-700 flex items-center gap-1">
+              Тигран
+              <span class="bg-slate-100 text-slate-500 text-[9px] px-1 rounded font-normal font-mono">A2+</span>
+</span>
+<span class="text-[10px] font-mono text-slate-400">18:17</span>
+</div>
+<div class="bg-slate-50 p-2.5 rounded-2xl rounded-tl-sm text-slate-700 leading-relaxed border border-slate-200/60">
+            А можно повторить правильное ударение в слове «զրուցել»? На последний слог?
+          </div>
+</div>
+</div>
+<!-- Chat Bottom Input Area -->
+<div class="p-3 bg-white border-t border-brand-slateBorder space-y-2" data-purpose="chat-input-controls">
+<div class="flex items-center space-x-1.5">
+<input class="flex-1 text-xs bg-slate-50 border-slate-200 rounded-xl px-3 py-2.5 focus:ring-1 focus:ring-brand-terracotta focus:border-brand-terracotta text-slate-800 placeholder-slate-400" placeholder="Написать реплику или вопрос..." type="text"/>
+<button class="p-2 bg-brand-terracotta hover:bg-brand-terracottaDark text-white rounded-xl shadow-xs transition" title="Отправить">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+<div class="flex items-center justify-between px-1 text-[11px] text-slate-400">
+<div class="flex items-center space-x-2">
+<button class="hover:text-slate-600 transition" title="Вставить эмодзи">😊</button>
+<button class="hover:text-slate-600 transition" title="Прикрепить файл">📎</button>
+<button class="hover:text-slate-600 transition font-mono font-bold text-slate-500" title="Армянская раскладка">ՀԱՅ</button>
+</div>
+<span class="text-[10px]">Enter ↵ для отправки</span>
+</div>
+</div>
+</aside>
+<!-- END: RightInteractivePanel -->
+</div>
+<!-- END: MainThreeColumnLayout -->
+</body></html>

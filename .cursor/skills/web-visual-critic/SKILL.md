@@ -22,11 +22,15 @@ description: >-
 
 ## Глаза
 
-1. Playwright screenshot wide 1440 и mobile 390
-2. Проскролль ключевые главы (не только hero)
-3. Контраст: `a11y` `check_color_contrast`
-4. После фикса: Image Diff before/after
-5. Перф: MCP `lighthouse` на localhost (LCP/CLS/INP)
+1. Playwright desktop `playwright`: screenshot 1440×900
+2. Mobile: **`playwright-iphone`** (iPhone 15) и **`playwright-android`** (Pixel 7) — hero, mid, footer
+3. Пальцевый скролл на mobile MCP: несколько фликов; jank = C-* (см. `mobile-touch-scroll`)
+4. Проскролль ключевые главы (не только hero)
+5. Контраст: `a11y` `check_color_contrast`
+6. После фикса: Image Diff before/after
+7. Перф: MCP `lighthouse` на localhost (LCP/CLS/INP), желательно mobile
+
+Ритуал mobile: `.cursor/skills/client-review/mobile-qa.md`
 
 Если localhost мёртв — не выдумывай пиксели. Верни Деплоеру.
 

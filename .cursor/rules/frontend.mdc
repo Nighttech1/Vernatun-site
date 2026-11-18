@@ -16,10 +16,14 @@ alwaysApply: false
 1. `.cursor/skills/image-to-luxury-ui/SKILL.md` — workflow от одной картинки
 2. `.cursor/skills/create-design-md/SKILL.md` — DESIGN.md из референса
 3. `.cursor/skills/luxury-web-craft/SKILL.md` + `design-token-guardian`
-4. Motion в chain → роль Motion (`motion.mdc`)
-5. `ui-ux-pro-max --design-system` — направление, не перебивать токены
-6. `/audit`: `plugins/frontend/anti_slop_scan.py`
-7. `knowledge/engineering/roles/frontend.md`
+4. **Мобилка:** `.cursor/skills/responsive-mobile-web/SKILL.md` (обязателен для адаптив-волн)
+5. **Палец/скролл:** `.cursor/skills/mobile-touch-scroll/SKILL.md` (Lenis/GSAP на iPhone/Android)
+6. Motion в chain → роль Motion (`motion.mdc`) + тот же `mobile-touch-scroll`
+7. `ui-ux-pro-max --design-system` — направление, не перебивать токены
+8. Глаза: MCP `playwright` (1440), `playwright-iphone`, `playwright-android`
+9. `/audit`: `plugins/frontend/anti_slop_scan.py`
+10. `knowledge/engineering/roles/frontend.md`
+11. Реестр плагинов: `plugins/frontend/PLUGINS.md`
 
 ## B) Flutter Life OS (data app)
 

@@ -1,0 +1,82 @@
+{
+  "iphone15": {
+    "header": {
+      "brandDisplay": "none",
+      "brandLinkH": 44,
+      "ctaH": 44,
+      "gap": 131,
+      "overflowX": false
+    },
+    "formats": {
+      "op": "1",
+      "h": 73
+    },
+    "cal": {
+      "btns": [
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        }
+      ],
+      "pills": [
+        44,
+        44,
+        44
+      ]
+    },
+    "podcast": {
+      "cardVisible": true,
+      "iframeDisplay": "none",
+      "openH": 44,
+      "audio": true
+    },
+    "menu": {
+      "bg": "rgb(249, 246, 240)",
+      "brand": "rgb(42, 90, 132)"
+    }
+  },
+  "pixel7": {
+    "header": {
+      "brandDisplay": "none",
+      "brandLinkH": 44,
+      "ctaH": 44,
+      "gap": 150,
+      "overflowX": false
+    },
+    "formats": {
+      "op": "1",
+      "h": 73
+    },
+    "cal": {
+      "btns": [
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        }
+      ],
+      "pills": [
+        44,
+        44,
+        44
+      ]
+    },
+    "podcast": {
+      "cardVisible": true,
+      "iframeDisplay": "none",
+      "openH": 44,
+      "audio": true
+    },
+    "menu": {
+      "bg": "rgb(249, 246, 240)",
+      "brand": "rgb(42, 90, 132)"
+    }
+  }
+}

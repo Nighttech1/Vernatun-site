@@ -1,0 +1,302 @@
+{
+  "iphone15": {
+    "issues": [],
+    "menu": {
+      "pages": [
+        {
+          "t": "Расписание",
+          "u": "underline"
+        },
+        {
+          "t": "Учебные материалы",
+          "u": "underline"
+        },
+        {
+          "t": "Все статьи",
+          "u": "underline"
+        },
+        {
+          "t": "Если стесняешься говорить",
+          "u": "underline"
+        },
+        {
+          "t": "Как проходит встреча",
+          "u": "underline"
+        },
+        {
+          "t": "Какой армянский мы говорим",
+          "u": "underline"
+        },
+        {
+          "t": "Как с нами связаться",
+          "u": "underline"
+        }
+      ],
+      "blocks": [
+        {
+          "t": "О клубе",
+          "u": "none",
+          "href": "/#club"
+        },
+        {
+          "t": "Форматы встреч",
+          "u": "none",
+          "href": "/#formats"
+        },
+        {
+          "t": "Атмосфера",
+          "u": "none",
+          "href": "/#atmosphere"
+        },
+        {
+          "t": "FAQ",
+          "u": "none",
+          "href": "/#faq"
+        },
+        {
+          "t": "Чат клуба",
+          "u": "none",
+          "href": "https://t.me/+n7clld6EXN9kYjUy"
+        },
+        {
+          "t": "Канал клуба",
+          "u": "none",
+          "href": "https://t.me/mosarmclub"
+        },
+        {
+          "t": "Бот записи",
+          "u": "none",
+          "href": "https://t.me/vernatunbot"
+        }
+      ]
+    },
+    "bento": [
+      {
+        "hot": false,
+        "dim": true,
+        "filter": "grayscale(1)",
+        "opacity": "0.48"
+      },
+      {
+        "hot": true,
+        "dim": false,
+        "filter": "none",
+        "opacity": "1"
+      },
+      {
+        "hot": false,
+        "dim": true,
+        "filter": "grayscale(1)",
+        "opacity": "0.48"
+      }
+    ],
+    "atm": {
+      "navCount": 2,
+      "speed": 0.0675,
+      "hasNav": true
+    },
+    "lb": {
+      "vp": "width=device-width, initial-scale=1",
+      "active": false
+    },
+    "sched": {
+      "legend": "Разговорный клуб\nТанцы\nВолейбол",
+      "pills": [
+        {
+          "hasSvg": true,
+          "text": "",
+          "active": true
+        },
+        {
+          "hasSvg": true,
+          "text": "",
+          "active": false
+        },
+        {
+          "hasSvg": true,
+          "text": "",
+          "active": false
+        },
+        {
+          "hasSvg": true,
+          "text": "",
+          "active": false
+        },
+        {
+          "hasSvg": true,
+          "text": "",
+          "active": false
+        },
+        {
+          "hasSvg": true,
+          "text": "",
+          "active": false
+        },
+        {
+          "hasSvg": true,
+          "text": "",
+          "active": false
+        },
+        {
+          "hasSvg": true,
+          "text": "",
+          "active": false
+        }
+      ],
+      "selectedDays": 0,
+      "ring": "rgb(249, 246, 240) 0px 0px 0px 2px, rgb(17, 24, 39) 0px 0px 0px 3.5px",
+      "myach": false
+    },
+    "font": "\"Century Gothic\", CenturyGothic, AppleGothic, \"URW Gothic\", sans-serif"
+  },
+  "pixel7": {
+    "issues": [],
+    "menu": {
+      "pages": [
+        {
+          "t": "Расписание",
+          "u": "underline"
+        },
+        {
+          "t": "Учебные материалы",
+          "u": "underline"
+        },
+        {
+          "t": "Все статьи",
+          "u": "underline"
+        },
+        {
+          "t": "Если стесняешься говорить",
+          "u": "underline"
+        },
+        {
+          "t": "Как проходит встреча",
+          "u": "underline"
+        },
+        {
+          "t": "Какой армянский мы говорим",
+          "u": "underline"
+        },
+        {
+          "t": "Как с нами связаться",
+          "u": "underline"
+        }
+      ],
+      "blocks": [
+        {
+          "t": "О клубе",
+          "u": "none",
+          "href": "/#club"
+        },
+        {
+          "t": "Форматы встреч",
+          "u": "none",
+          "href": "/#formats"
+        },
+        {
+          "t": "Атмосфера",
+          "u": "none",
+          "href": "/#atmosphere"
+        },
+        {
+          "t": "FAQ",
+          "u": "none",
+          "href": "/#faq"
+        },
+        {
+          "t": "Чат клуба",
+          "u": "none",
+          "href": "https://t.me/+n7clld6EXN9kYjUy"
+        },
+        {
+          "t": "Канал клуба",
+          "u": "none",
+          "href": "https://t.me/mosarmclub"
+        },
+        {
+          "t": "Бот записи",
+          "u": "none",
+          "href": "https://t.me/vernatunbot"
+        }
+      ]
+    },
+    "bento": [
+      {
+        "hot": false,
+        "dim": true,
+        "filter": "grayscale(1)",
+        "opacity": "0.48"
+      },
+      {
+        "hot": true,
+        "dim": false,
+        "filter": "none",
+        "opacity": "1"
+      },
+      {
+        "hot": false,
+        "dim": true,
+        "filter": "grayscale(1)",
+        "opacity": "0.48"
+      }
+    ],
+    "atm": {
+      "navCount": 2,
+      "speed": 0.0675,
+      "hasNav": true
+    },
+    "lb": {
+      "vp": "width=device-width, initial-scale=1",
+      "active": false
+    },
+    "sched": {
+      "legend": "Разговорный клуб\nТанцы\nВолейбол",
+      "pills": [
+        {
+          "hasSvg": true,
+          "text": "",
+          "active": true
+        },
+        {
+          "hasSvg": true,
+          "text": "",
+          "active": false
+        },
+        {
+          "hasSvg": true,
+          "text": "",
+          "active": false
+        },
+        {
+          "hasSvg": true,
+          "text": "",
+          "active": false
+        },
+        {
+          "hasSvg": true,
+          "text": "",
+          "active": false
+        },
+        {
+          "hasSvg": true,
+          "text": "",
+          "active": false
+        },
+        {
+          "hasSvg": true,
+          "text": "",
+          "active": false
+        },
+        {
+          "hasSvg": true,
+          "text": "",
+          "active": false
+        }
+      ],
+      "selectedDays": 0,
+      "ring": "rgb(249, 246, 240) 0px 0px 0px 2px, rgb(17, 24, 39) 0px 0px 0px 3.5px",
+      "myach": false
+    },
+    "font": "\"Century Gothic\", CenturyGothic, AppleGothic, \"URW Gothic\", sans-serif"
+  }
+}

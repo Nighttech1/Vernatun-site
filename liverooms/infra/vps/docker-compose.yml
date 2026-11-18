@@ -1,0 +1,21 @@
+# LiveKit on Vernatun VPS — public multi-party audio test
+# Deploy path on server: /home/infinity/Vernatun website/livekit/
+
+services:
+  livekit:
+    image: livekit/livekit-server:v1.13.4
+    restart: unless-stopped
+    network_mode: host
+    command: --config /etc/livekit.yaml --node-ip ${LIVEKIT_NODE_IP}
+    volumes:
+      - ./livekit.yaml:/etc/livekit.yaml:ro
+    env_file:
+      - .env
+
+  coturn:
+    image: coturn/coturn:4.6.2-alpine
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - ./turnserver.conf:/etc/coturn/turnserver.conf:ro
+    command: ["-c", "/etc/coturn/turnserver.conf"]

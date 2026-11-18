@@ -1,0 +1,36 @@
+{
+  "iphone15": {
+    "header": {
+      "ctaH": 44,
+      "ctaW": 155
+    },
+    "formats": {
+      "opacity": "1",
+      "maxHeight": "88px",
+      "text": "Уютные дискуссии в мини-группах за чашко",
+      "visibleH": 73
+    },
+    "contacts": {
+      "h": 44,
+      "w": 93,
+      "text": "Открыть"
+    }
+  },
+  "pixel7": {
+    "header": {
+      "ctaH": 44,
+      "ctaW": 155
+    },
+    "formats": {
+      "opacity": "1",
+      "maxHeight": "88px",
+      "text": "Уютные дискуссии в мини-группах за чашко",
+      "visibleH": 73
+    },
+    "contacts": {
+      "h": 44,
+      "w": 93,
+      "text": "Открыть"
+    }
+  }
+}

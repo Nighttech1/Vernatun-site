@@ -13,6 +13,7 @@
 | Фиксер | [fixer](fixer/) | да |
 | Клиент | [client](client/) | да (visual MCP) |
 | Геоаналитик | [geo-analyst](geo-analyst/) | да (OSM/Mapbox/Firecrawl/RU maps) |
-| Деплоер | [deployer](deployer/) | |
+| Деплоер | [deployer](deployer/) | да (LiveKit ops + health) |
+| **Realtime (LiveKit)** | [realtime](realtime/) | да (docs MCP, health check, ops skills) |
 
 После добавления плагина: строка здесь + запись в `…/PLUGINS.md`.

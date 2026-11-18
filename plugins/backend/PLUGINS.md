@@ -13,3 +13,14 @@
 MCP Postgres (уже в проекте): read-only gate — не для массового upsert векторов через MCP; запись через приложение / миграции.
 
 Env: `DATABASE_URL` / postgres gate; `PINECONE_API_KEY`; `LLAMA_CLOUD_API_KEY`; Chroma cloud keys — только `.env`.
+
+## Vernatun Lounge (голосовые комнаты)
+
+| Name | Type | Path | When |
+|------|------|------|------|
+| livekit-voice-rooms | skill | `.cursor/skills/livekit-voice-rooms/SKILL.md` | роутер раздела |
+| voice-room-safety | skill | `.cursor/skills/voice-room-safety/SKILL.md` | Trust Score, gates, audit |
+| webrtc-realtime-ops | skill | `.cursor/skills/webrtc-realtime-ops/SKILL.md` | webhooks / рядом с Realtime |
+| livekit-docs | MCP | `https://docs.livekit.io/mcp` | AccessToken, RoomService |
+
+Env Lounge: `LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET` — только сервер, не коммитить.

@@ -1,0 +1,49 @@
+name: Build and deploy to VPS
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: vernatun-production
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: liverooms/web/package-lock.json
+      - name: Validate articles
+        run: npm run articles:validate
+      - name: Install campus dependencies
+        working-directory: liverooms/web
+        run: npm ci
+      - name: Build campus
+        working-directory: liverooms/web
+        run: npm run build
+      - name: Package website, campus, admin and API
+        run: bash scripts/package-web-release.sh
+      - name: Deploy release
+        env:
+          SSH_HOST: ${{ secrets.VPS_HOST }}
+          SSH_USER: ${{ secrets.VPS_USER }}
+          SSH_KEY: ${{ secrets.VPS_DEPLOY_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/vernatun_deploy
+          chmod 600 ~/.ssh/vernatun_deploy
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          ssh -i ~/.ssh/vernatun_deploy -o BatchMode=yes -o StrictHostKeyChecking=yes \
+            -o ConnectTimeout=20 "$SSH_USER@$SSH_HOST" deploy < release.tgz
+      - name: Check public website and API
+        run: |
+          curl --fail --silent --show-error --retry 5 --retry-delay 3 --retry-all-errors https://vernatunspeakclub.com/ -o /dev/null
+          curl --fail --silent --show-error --retry 5 --retry-delay 3 --retry-all-errors https://vernatunspeakclub.com/api/lounge/rooms -o /dev/null

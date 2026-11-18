@@ -1,0 +1,45 @@
+{
+  "menuBg": {
+    "bg": "rgb(249, 246, 240)",
+    "maxH": "514.02px",
+    "overflow": "auto",
+    "solid": true
+  },
+  "touch": {
+    "stickyTA": "pan-y",
+    "stageTA": "pan-y",
+    "overflowX": false
+  },
+  "pills": [
+    {
+      "text": "Клуб",
+      "h": 32,
+      "w": 44
+    },
+    {
+      "text": "Клуб",
+      "h": 32,
+      "w": 44
+    },
+    {
+      "text": "Мяч",
+      "h": 32,
+      "w": 44
+    },
+    {
+      "text": "Клуб",
+      "h": 32,
+      "w": 44
+    },
+    {
+      "text": "Клуб",
+      "h": 32,
+      "w": 44
+    },
+    {
+      "text": "Танцы",
+      "h": 32,
+      "w": 44
+    }
+  ]
+}

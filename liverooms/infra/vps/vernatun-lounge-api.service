@@ -1,0 +1,15 @@
+[Unit]
+Description=Vernatun Lounge API (rooms, tokens, owner inbox)
+After=network.target
+
+[Service]
+Type=simple
+User=infinity
+WorkingDirectory=/home/infinity/Vernatun website/livekit
+EnvironmentFile=/home/infinity/Vernatun website/livekit/lounge-owner.env
+ExecStart=/bin/bash -lc 'cd "/home/infinity/Vernatun website/livekit" && exec ./.venv/bin/python ./lounge_api.py'
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

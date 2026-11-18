@@ -1,0 +1,178 @@
+:root {
+  /* Vernatun site brand — azure / parchment / terracotta (W-41) */
+  --brand-azure: #2a5a84;
+  --brand-azure-dark: #1f4668;
+  --brand-terracotta: #c95b36;
+  --brand-terracotta-dark: #a34b1c;
+  --brand-amber: #e6b25a;
+  --brand-amber-badge: #d97706;
+  /* Legacy aliases → azure (do not use navy #1e293b as brand) */
+  --brand-navy: var(--brand-azure);
+  --brand-slate: var(--brand-azure);
+  --brand-surface: #f9f6f0;
+  --brand-cream: #fdfbf7;
+  --brand-border: #e8e2d8;
+  --brand-terracotta-light: #fff4ee;
+
+  --live-red: #dc2626;
+  --live-green: #059669;
+
+  --level-blue-bg: #eff6ff;
+  --level-blue-text: #2a5a84;
+  --level-blue-border: #bfdbfe;
+  --level-green-bg: #ecfdf5;
+  --level-green-text: #047857;
+  --level-green-border: #a7f3d0;
+  --level-rose-bg: #fff1f2;
+  --level-rose-text: #be123c;
+  --level-rose-border: #fecdd3;
+  --level-amber-bg: #fffbeb;
+  --level-amber-text: #b45309;
+  --level-amber-border: #fde68a;
+
+  /* Site canon — Century Gothic everywhere */
+  --font-sans: 'Century Gothic', CenturyGothic, sans-serif;
+  --font-mono: 'Century Gothic', CenturyGothic, sans-serif;
+  --font-display: 'Century Gothic', CenturyGothic, sans-serif;
+
+  --radius-base: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --shadow-sm: 0 1px 2px rgba(42, 90, 132, 0.06);
+  --shadow-md: 0 4px 12px -2px rgba(42, 90, 132, 0.12);
+  --shadow-card: 0 1px 0 rgba(42, 90, 132, 0.06),
+    0 12px 32px -12px rgba(42, 90, 132, 0.14);
+
+  --color-parchment: var(--brand-surface);
+  --color-azure: var(--brand-azure);
+  --color-terracotta: var(--brand-terracotta);
+  --color-sungold: var(--brand-amber);
+  --color-ink: var(--brand-azure);
+  --color-mist: var(--brand-border);
+  --radius-lg: var(--radius-base);
+}
+
+@font-face {
+  font-family: 'Century Gothic';
+  src: url('/fonts/CenturyGothic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Century Gothic';
+  src: url('/fonts/CenturyGothic-Bold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Century Gothic';
+  src: url('/fonts/CenturyGothic-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: CenturyGothic;
+  src: url('/fonts/CenturyGothic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: CenturyGothic;
+  src: url('/fonts/CenturyGothic-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  height: 100%;
+  font-family: var(--font-sans);
+  color: var(--brand-azure);
+  background-color: var(--brand-surface);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100%;
+  height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--brand-terracotta);
+  color: #fff;
+}
+
+@keyframes pulse-live {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.18);
+  }
+}
+
+.animate-live-dot {
+  animation: pulse-live 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes audio-wave {
+  0%,
+  100% {
+    height: 4px;
+  }
+  50% {
+    height: 16px;
+  }
+}
+
+.wave-bar-1 {
+  animation: audio-wave 1s ease-in-out infinite;
+}
+.wave-bar-2 {
+  animation: audio-wave 1.2s ease-in-out infinite 0.2s;
+}
+.wave-bar-3 {
+  animation: audio-wave 0.8s ease-in-out infinite 0.4s;
+}
+.wave-bar-4 {
+  animation: audio-wave 1.1s ease-in-out infinite 0.1s;
+}

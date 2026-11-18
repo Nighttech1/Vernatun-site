@@ -1,0 +1,299 @@
+{
+  "findings": [
+    {
+      "name": "home",
+      "url": "http://127.0.0.1:8080/",
+      "overflowX": false,
+      "sw": 393,
+      "cw": 393,
+      "smallTaps": [
+        {
+          "tag": "A",
+          "text": "ВЕРНАТУН",
+          "cls": "flex min-w-0 items-center gap-2 text-azu",
+          "w": 108,
+          "h": 36
+        }
+      ],
+      "hiddenHover": 0,
+      "clipped": [],
+      "touchNone": [],
+      "title": "Разговорный клуб армянского языка Vernatun — Занятия и практика общения"
+    },
+    {
+      "name": "about",
+      "url": "http://127.0.0.1:8080/about.html",
+      "overflowX": false,
+      "sw": 393,
+      "cw": 393,
+      "smallTaps": [
+        {
+          "tag": "A",
+          "text": "ВЕРНАТУН",
+          "cls": "flex min-w-0 items-center gap-2 text-azu",
+          "w": 108,
+          "h": 36
+        }
+      ],
+      "hiddenHover": 0,
+      "clipped": [],
+      "touchNone": [],
+      "title": "Разговорный клуб армянского языка Vernatun — Занятия и практика общения"
+    },
+    {
+      "name": "schedule",
+      "url": "http://127.0.0.1:8080/schedule.html",
+      "overflowX": false,
+      "sw": 393,
+      "cw": 393,
+      "smallTaps": [
+        {
+          "tag": "A",
+          "text": "ВЕРНАТУН",
+          "cls": "flex min-w-0 items-center gap-2 text-azu",
+          "w": 108,
+          "h": 36
+        },
+        {
+          "tag": "BUTTON",
+          "text": "",
+          "cls": "rounded-full p-2 text-azure transition h",
+          "w": 36,
+          "h": 36
+        },
+        {
+          "tag": "BUTTON",
+          "text": "",
+          "cls": "rounded-full p-2 text-azure transition h",
+          "w": 36,
+          "h": 36
+        }
+      ],
+      "hiddenHover": 0,
+      "clipped": [],
+      "touchNone": [],
+      "title": "Расписание — Вернатун"
+    },
+    {
+      "name": "materials",
+      "url": "http://127.0.0.1:8080/materials.html",
+      "overflowX": false,
+      "sw": 393,
+      "cw": 393,
+      "smallTaps": [
+        {
+          "tag": "A",
+          "text": "ВЕРНАТУН",
+          "cls": "flex min-w-0 items-center gap-2 text-azu",
+          "w": 108,
+          "h": 36
+        }
+      ],
+      "hiddenHover": 1,
+      "clipped": [],
+      "touchNone": [],
+      "title": "Учебные материалы — Вернатун"
+    },
+    {
+      "name": "articles",
+      "url": "http://127.0.0.1:8080/articles.html",
+      "overflowX": false,
+      "sw": 393,
+      "cw": 393,
+      "smallTaps": [
+        {
+          "tag": "A",
+          "text": "ВЕРНАТУН",
+          "cls": "flex min-w-0 items-center gap-2 text-azu",
+          "w": 108,
+          "h": 36
+        }
+      ],
+      "hiddenHover": 3,
+      "clipped": [],
+      "touchNone": [],
+      "title": "Статьи — Вернатун"
+    },
+    {
+      "name": "contacts",
+      "url": "http://127.0.0.1:8080/contacts.html",
+      "overflowX": false,
+      "sw": 393,
+      "cw": 393,
+      "smallTaps": [
+        {
+          "tag": "A",
+          "text": "ВЕРНАТУН",
+          "cls": "flex min-w-0 items-center gap-2 text-azu",
+          "w": 108,
+          "h": 36
+        }
+      ],
+      "hiddenHover": 3,
+      "clipped": [],
+      "touchNone": [],
+      "title": "Контакты — Вернатун"
+    },
+    {
+      "name": "article1",
+      "url": "http://127.0.0.1:8080/articles/esli-stesnyaeshsya.html",
+      "overflowX": false,
+      "sw": 393,
+      "cw": 393,
+      "smallTaps": [
+        {
+          "tag": "A",
+          "text": "ВЕРНАТУН",
+          "cls": "flex min-w-0 items-center gap-2 text-azu",
+          "w": 108,
+          "h": 36
+        }
+      ],
+      "hiddenHover": 0,
+      "clipped": [],
+      "touchNone": [],
+      "title": "Если стесняешься говорить — Вернатун"
+    },
+    {
+      "name": "podcast",
+      "url": "http://127.0.0.1:8080/materials/podcasts/ideal-life/index.html",
+      "overflowX": false,
+      "sw": 393,
+      "cw": 393,
+      "smallTaps": [
+        {
+          "tag": "A",
+          "text": "Назад",
+          "cls": "inline-flex items-center gap-2 rounded b",
+          "w": 93,
+          "h": 38
+        }
+      ],
+      "hiddenHover": 0,
+      "clipped": [],
+      "touchNone": [],
+      "title": "Культ идеальной жизни — учебные материалы · Vernatun"
+    }
+  ],
+  "menu": {
+    "bg": "rgb(249, 246, 240)",
+    "brand": "rgb(42, 90, 132)",
+    "solid": true
+  },
+  "formats": [
+    {
+      "op": "1",
+      "h": 73,
+      "text": "Уютные дискуссии в мини-группа"
+    },
+    {
+      "op": "1",
+      "h": 73,
+      "text": "Блот, нарды и современные игры"
+    },
+    {
+      "op": "1",
+      "h": 73,
+      "text": "Посиделки после встреч, прогул"
+    },
+    {
+      "op": "1",
+      "h": 73,
+      "text": "Спорт без давления на результа"
+    },
+    {
+      "op": "1",
+      "h": 73,
+      "text": "Погружение в культуру через жи"
+    },
+    {
+      "op": "1",
+      "h": 88,
+      "text": "Азарт, динамика и ракетки. Сов"
+    }
+  ],
+  "atmosphere": {
+    "ta": "pan-y"
+  },
+  "faq": [
+    {
+      "h": 104,
+      "text": "Подойдёт ли мне клуб, если я знаю только"
+    },
+    {
+      "h": 56,
+      "text": "На каком языке ведутся встречи?"
+    },
+    {
+      "h": 80,
+      "text": "Как проходят наши офлайн-встречи?"
+    }
+  ],
+  "schedule": {
+    "overflowX": false,
+    "pills": [
+      {
+        "t": "Клуб",
+        "h": 44,
+        "w": 44
+      },
+      {
+        "t": "Клуб",
+        "h": 44,
+        "w": 44
+      },
+      {
+        "t": "Мяч",
+        "h": 44,
+        "w": 44
+      },
+      {
+        "t": "Клуб",
+        "h": 44,
+        "w": 44
+      },
+      {
+        "t": "Клуб",
+        "h": 44,
+        "w": 44
+      },
+      {
+        "t": "Танцы",
+        "h": 44,
+        "w": 44
+      },
+      {
+        "t": "Мяч",
+        "h": 44,
+        "w": 44
+      },
+      {
+        "t": "Клуб",
+        "h": 44,
+        "w": 44
+      }
+    ]
+  },
+  "header": {
+    "burger": {
+      "l": 12,
+      "r": 56,
+      "w": 44,
+      "h": 44
+    },
+    "brand": {
+      "l": 106,
+      "r": 170,
+      "w": 64,
+      "h": 16
+    },
+    "cta": {
+      "l": 226,
+      "r": 381,
+      "w": 155,
+      "h": 44
+    },
+    "gap": 56,
+    "vw": 393
+  }
+}

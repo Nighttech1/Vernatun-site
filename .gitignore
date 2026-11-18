@@ -8,3 +8,52 @@ id_ed25519
 id_rsa
 *_rsa
 *_ed25519
+
+# LiveKit / Lounge secrets
+liverooms/infra/.env
+**/.env
+!.env.example
+!**/.env.example
+
+# Dependencies, generated builds and local tooling
+**/node_modules/
+**/dist/
+**/__pycache__/
+**/*.pyc
+**/.venv/
+**/venv/
+.playwright-mcp/
+**/test-results/
+**/playwright-report/
+.cursor/mcp.json
+.agents/
+*.local.ps1
+**/.env.*
+!**/.env.example
+*.key
+*.pfx
+*.p12
+
+# Local room/user data: never publish or deploy
+liverooms/campus-data/*
+!liverooms/campus-data/README.md
+liverooms/infra/vps/chat/
+liverooms/infra/vps/sessions/
+liverooms/infra/vps/*.log*
+liverooms/infra/vps/*.jsonl
+liverooms/infra/vps/board_spaces.json
+liverooms/infra/vps/rooms_dynamic.json
+liverooms/infra/vps/trust.json
+liverooms/infra/spacedeck/database/
+liverooms/infra/spacedeck/storage/
+
+# Local visual QA output and unused camera originals
+/mcp-*.png
+/w24-*.png
+memory/**/*.png
+memory/**/*.jpg
+images/*.MOV
+images/Untitled
+
+release.tgz
+.cursor/debug-*.log

@@ -1,0 +1,31 @@
+# Keys filled by deploy script from .env (not committed).
+
+port: 7880
+bind_addresses:
+  - "0.0.0.0"
+
+rtc:
+  tcp_port: 7881
+  udp_port: 7882
+  use_external_ip: true
+  turn_servers:
+    - host: vernatunspeakclub.com
+      port: 3478
+      protocol: udp
+      username: vernatun
+      credential: "TURN_CREDENTIAL_PLACEHOLDER"
+
+turn:
+  enabled: false
+
+logging:
+  level: info
+
+# Filled by deploy: WEBHOOK_URL → lounge_api /api/lounge/webhooks/livekit
+webhook:
+  api_key: KEY_PLACEHOLDER
+  urls:
+    - "WEBHOOK_URL_PLACEHOLDER"
+
+keys:
+  KEY_PLACEHOLDER: "SECRET_PLACEHOLDER"

@@ -19,6 +19,9 @@ RAG / memory / parse / vector / Cortana retrieval. Секреты — тольк
 | Chroma skills | skill | `.agents/skills/chroma-local/`, `chroma-cloud/` | local or cloud collections | entity ≠ dialog collection |
 | Pinecone skills | skill | `.agents/skills/pinecone-*` | docs, MCP tools, query | |
 | Router | skill | `.cursor/skills/rag-stack/SKILL.md` | выбор store + Cortana priority | |
+| voice-room-didactics | skill | `.cursor/skills/voice-room-didactics/SKILL.md` | Scenario / Lexicon / private coach / toxicity events | Lounge |
+| livekit-voice-rooms | skill | `.cursor/skills/livekit-voice-rooms/SKILL.md` | роутер голосовых комнат | |
+| livekit-docs | MCP | `https://docs.livekit.io/mcp` | DataChannel / Agents / egress | |
 
 ## Env (имена, не значения)
 
@@ -40,3 +43,4 @@ CHROMA_DATABASE=
 - Не подключать Mem0/Pinecone MCP «на всякий случай» без задачи в chain.
 - Не смешивать dialog Chroma (`cortana_rag/`) с entity-index collection.
 - Не начинать GraphRAG без отдельного spec Архитектора.
+- Lounge AI coach: только приватный разбор автору реплики; падение LLM не должно рвать SFU.

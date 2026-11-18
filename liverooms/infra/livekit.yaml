@@ -1,0 +1,39 @@
+# Local RTC tuning (keys from --dev: devkey / secret)
+# C-241: advertise 127.0.0.1 so host browsers (not Docker bridge 172.x) can keep ICE alive.
+
+port: 7880
+bind_addresses:
+  - "0.0.0.0"
+
+rtc:
+  tcp_port: 7881
+  udp_port: 7882
+  port_range_start: 51000
+  port_range_end: 51020
+  use_external_ip: false
+  # Critical on Docker Desktop Windows: without this, host candidates are 172.20.0.x
+  # → short ICE → PC manager closed → publishData / board sync broken.
+  node_ip: 127.0.0.1
+  # Coturn service name on compose network (not 127.0.0.1 inside the LiveKit container)
+  turn_servers:
+    - host: host.docker.internal
+      port: 3478
+      protocol: udp
+      username: vernatun
+      credential: vernatun_turn_dev_only
+
+turn:
+  enabled: false
+
+logging:
+  level: info
+
+# Prometheus metrics (separate port; scraped by profile `metrics`)
+prometheus:
+  port: 6789
+
+# Events → lounge_api (append-only webhooks.log). API must listen on host :8765.
+webhook:
+  api_key: devkey
+  urls:
+    - http://host.docker.internal:8765/api/lounge/webhooks/livekit

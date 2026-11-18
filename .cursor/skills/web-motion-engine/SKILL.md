@@ -33,16 +33,19 @@ description: >-
 
 ## Lenis
 
-- `lerp` 0.08–0.12. Не убивай нативный скролл на мобиле без нужды.
+- `lerp` 0.08–0.12 на desktop. Не убивай нативный скролл на мобиле без нужды.
+- На `< 768px`: native **или** Lenis с рабочим touch (`syncTouch` / актуальная опция версии). Если палец лагает — **выключи Lenis на mobile**.
 - Якоря и focus должны работать.
 - Не комбинируй Lenis с `scroll-behavior: smooth` на `html`.
+- Полный ритуал пальца: `.cursor/skills/mobile-touch-scroll/SKILL.md`.
 
 ## GSAP / ScrollTrigger
 
 - Один ScrollTrigger на главу, не на каждый абзац.
-- `invalidateOnRefresh: true` после шрифтов и картинок.
-- Pin-секции: фиксируй высоту, не прыгай CLS.
+- `invalidateOnRefresh: true` после шрифтов и картинок; `ScrollTrigger.refresh()` после ресайза/мобильного layout.
+- Pin-секции: фиксируй высоту, не прыгай CLS; на mobile упрощай pin или заменяй вертикальным рассказом.
 - Kill/revert при SPA unmount.
+- Touch/жесты: см. `mobile-touch-scroll` (не `preventDefault` на document touchmove).
 
 ## Бюджет
 

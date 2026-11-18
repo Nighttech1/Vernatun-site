@@ -7,3 +7,7 @@
 | Lighthouse MCP | MCP | lighthouse | LCP/CLS/INP |
 | Playwright MCP | MCP | playwright | скрины |
 | sqlite MCP | MCP | sqlite | SELECT/PRAGMA only |
+| livekit-voice-rooms | skill | `.cursor/skills/livekit-voice-rooms/SKILL.md` | guards Lounge |
+| livekit-health | CLI | `plugins/realtime/livekit_health_check.py` | SFU up после деплоя |
+| dual-peer audio | manual guard | memory/tickets/.../guards.md | Playwright ≠ двусторонний звук |
+| livekit-docs | MCP | `https://docs.livekit.io/mcp` | ожидаемое поведение SDK |
