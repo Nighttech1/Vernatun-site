@@ -38,9 +38,9 @@ jobs:
         run: |
           set -euo pipefail
           install -m 700 -d ~/.ssh
-          printf '%s\n' "$SSH_KEY" > ~/.ssh/vernatun_deploy
+          printf '%s\n' "$SSH_KEY" | tr -d '\r' > ~/.ssh/vernatun_deploy
           chmod 600 ~/.ssh/vernatun_deploy
-          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          printf '%s\n' "$SSH_KNOWN_HOSTS" | tr -d '\r' > ~/.ssh/known_hosts
           ssh -i ~/.ssh/vernatun_deploy -o BatchMode=yes -o StrictHostKeyChecking=yes \
             -o ConnectTimeout=20 "$SSH_USER@$SSH_HOST" deploy < release.tgz
       - name: Check public website and API
