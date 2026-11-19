@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "article_id": "VA26-001",
+  "slug": null,
+  "version": null,
+  "status": "review",
+  "category": "Лайфхакер",
+  "tags": [
+    "Технологии",
+    "Армянский язык"
+  ],
+  "planned_publication_at": null,
+  "timezone": "Europe/Moscow",
+  "research": {
+    "status": "not_started",
+    "path": "research.md",
+    "checked_at": null,
+    "recheck_required": true
+  },
+  "package": {
+    "article_sha256": null,
+    "media_sha256": null,
+    "channel_variants": {}
+  },
+  "approval": {
+    "status": "pending",
+    "approved_by": null,
+    "approved_at": null,
+    "evidence": null,
+    "approved_package_sha256": null
+  },
+  "site": {
+    "status": "not_published",
+    "url": null,
+    "verified_at": null
+  },
+  "delivery": {
+    "bot": "blocked_config",
+    "dzen": "blocked_config",
+    "vc": "blocked_config"
+  }
+}

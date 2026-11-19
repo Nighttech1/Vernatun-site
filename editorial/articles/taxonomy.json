@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "categories": [
+    {
+      "id": "lifehacks",
+      "label": "Лайфхакер",
+      "description": "Практические инструкции, сравнения и инструменты с проверяемой пользой."
+    },
+    {
+      "id": "news",
+      "label": "Новости",
+      "description": "Проверенные актуальные события, возможности и изменения с прямой пользой."
+    }
+  ],
+  "tags": {
+    "encoding": "comma-separated scalar in front-matter",
+    "minimum_for_new_articles": 1,
+    "maximum": 6,
+    "max_characters_per_tag": 40,
+    "examples": [
+      "Армянский язык",
+      "Технологии",
+      "Обучение",
+      "Семья",
+      "Сообщество",
+      "Армения",
+      "Путешествия",
+      "Кухня",
+      "Афиша"
+    ]
+  },
+  "display": {
+    "placement": "above_title",
+    "order": [
+      "category",
+      "tags"
+    ],
+    "tag_prefix": "#"
+  },
+  "legacy": {
+    "allow_existing_categories": true,
+    "tags_optional": true
+  }
+}

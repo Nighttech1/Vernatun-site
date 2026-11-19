@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "mode": "design_not_deployed",
+  "site": {
+    "role": "primary",
+    "requires_approved_package": true,
+    "requires_research": true
+  },
+  "bot": {
+    "enabled": false,
+    "reason": "receiver_contract_and_server_authorization_not_verified"
+  },
+  "dzen": {
+    "enabled": false,
+    "account_url": null,
+    "mode": "pending_capability_check",
+    "rss_spec_verified": false
+  },
+  "vc": {
+    "enabled": false,
+    "account_url": null,
+    "mode": "pending_permitted_route",
+    "api_spec_verified": false,
+    "commercial_pro_status": "unknown",
+    "all_articles_eligible": false
+  },
+  "failure_policy": {
+    "preserve_pending_jobs": true,
+    "no_duplicate_posts": true,
+    "no_bypass_of_channel_limits": true
+  }
+}

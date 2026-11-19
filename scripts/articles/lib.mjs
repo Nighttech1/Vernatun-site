@@ -87,6 +87,18 @@ export function renderBody(md) {
   return parts.join('\n        ');
 }
 
+// Optional comma-separated tags preserve the existing scalar front-matter format.
+export function parseTags(tags = '') {
+  return [...new Set(String(tags).split(',').map((tag) => tag.trim()).filter(Boolean))];
+}
+
+export function renderTaxonomy(data) {
+  const tags = parseTags(data.tags).map((tag) =>
+    `<span class="font-normal normal-case tracking-normal text-ink/60">#${escapeHtml(tag)}</span>`
+  ).join(' ');
+  return `<span>${escapeHtml(data.category)}</span>${tags ? ' ' + tags : ''}`;
+}
+
 // --- validation -------------------------------------------------------------
 
 export function validateArticle(data, body, knownSlugs = []) {
@@ -106,6 +118,9 @@ export function validateArticle(data, body, knownSlugs = []) {
   for (const [f, max] of Object.entries(LIMITS)) {
     if (data[f] && String(data[f]).length > max) errors.push(`${f}: длиннее ${max} символов`);
   }
+  const tags = parseTags(data.tags);
+  if (tags.length > 6) errors.push('tags: максимум 6 тегов');
+  if (tags.some((tag) => tag.length > 40)) errors.push('tags: тег длиннее 40 символов');
   if (knownSlugs.filter((s) => s === data.slug).length > 1) {
     errors.push(`дублирующийся slug: ${data.slug}`);
   }
@@ -126,6 +141,8 @@ export function renderArticlePage({ data, body }) {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: data.title,
+    articleSection: data.category,
+    keywords: parseTags(data.tags),
     description: data.description,
     datePublished: data.date,
     inLanguage: 'ru',
@@ -151,14 +168,14 @@ export function renderArticlePage({ data, body }) {
   <link rel="preload" href="/fonts/CenturyGothic-Bold.ttf?v=${ASSET_VER}" as="font" type="font/ttf" crossorigin />
   <link rel="stylesheet" href="/css/site.css?v=${ASSET_VER}" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
-  <script type="application/ld+json">${JSON.stringify(ld)}</script>
+  <script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>
 </head>
 <body class="paper-grain min-h-screen antialiased text-azure" x-data="lightbox()" @keydown.escape.window="close()">
   <div id="site-header"></div>
   <script src="/js/site.js?v=${ASSET_VER}"></script>
   <main>
     <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
-      <p class="text-xs font-bold uppercase tracking-widest text-terracotta">Статья</p>
+      <p class="text-xs font-bold uppercase tracking-widest text-terracotta">${renderTaxonomy(data)}</p>
       <h1 class="mt-3 font-display text-3xl font-bold text-azure sm:text-4xl">${title}</h1>
       <p class="mt-6 text-lg leading-relaxed text-ink/80">${renderInline(data.lead)}</p>
       <div class="mt-8 space-y-4 text-base leading-relaxed text-ink/75">
@@ -176,7 +193,7 @@ export function renderArticlePage({ data, body }) {
 
 export function renderListRow(data) {
   return `          <a href="/articles/${data.slug}" class="magazine-row group">
-            <p class="text-xs font-bold uppercase tracking-widest text-terracotta">${escapeHtml(data.category)}</p>
+            <p class="text-xs font-bold uppercase tracking-widest text-terracotta">${renderTaxonomy(data)}</p>
             <p class="font-display text-2xl text-azure group-hover:text-terracotta">${escapeHtml(data.title)}</p>
             <p class="mag-open text-sm text-ink/50">Читать</p>
           </a>`;
