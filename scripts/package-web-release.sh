@@ -10,6 +10,7 @@ done
 cp liverooms/web/dist/index.html "$stage/web/campus-app.html"
 cp -a liverooms/web/dist/assets "$stage/web/"
 for item in index.html app.js styles.css; do cp "liverooms/admin/$item" "$stage/admin/"; done
-for item in lounge_api.py spacedeck_client.py; do cp "liverooms/infra/vps/$item" "$stage/api/"; done
+for item in lounge_api.py spacedeck_client.py calendar_feed.py; do cp "liverooms/infra/vps/$item" "$stage/api/"; done
 printf '%s\n' "${GITHUB_SHA:-$(git rev-parse HEAD)}" > "$stage/REVISION"
 tar --exclude='*.MOV' --exclude='*.mov' -czf release.tgz -C "$stage" .
+

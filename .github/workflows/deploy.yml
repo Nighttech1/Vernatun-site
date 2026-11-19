@@ -21,6 +21,11 @@ jobs:
           cache-dependency-path: liverooms/web/package-lock.json
       - name: Validate articles
         run: npm run articles:validate
+      - name: Check public calendar contracts
+        run: |
+          python3 -m unittest discover -s test -p 'test_calendar_feed.py' -v
+          node --test test/calendar-feed.test.cjs
+          node --check js/site.js
       - name: Install campus dependencies
         working-directory: liverooms/web
         run: npm ci
@@ -47,3 +52,4 @@ jobs:
         run: |
           curl --fail --silent --show-error --retry 5 --retry-delay 3 --retry-all-errors https://vernatunspeakclub.com/ -o /dev/null
           curl --fail --silent --show-error --retry 5 --retry-delay 3 --retry-all-errors https://vernatunspeakclub.com/api/lounge/rooms -o /dev/null
+
