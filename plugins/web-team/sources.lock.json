@@ -1,0 +1,75 @@
+{
+  "checkedAt": "2026-11-19",
+  "skills": [
+    {
+      "name": "frontend-design",
+      "repository": "anthropics/skills",
+      "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+      "path": "skills/frontend-design",
+      "installedPath": ".agents/skills/frontend-design",
+      "license": "Apache-2.0",
+      "modified": false
+    },
+    {
+      "name": "webapp-testing",
+      "repository": "anthropics/skills",
+      "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+      "path": "skills/webapp-testing",
+      "installedPath": ".agents/skills/webapp-testing",
+      "license": "Apache-2.0",
+      "modified": false
+    },
+    {
+      "name": "chrome-devtools",
+      "repository": "ChromeDevTools/chrome-devtools-mcp",
+      "commit": "cf98d8b88d74bfaa684412625fc89b58626919a5",
+      "path": "skills/chrome-devtools",
+      "installedPath": ".agents/skills/chrome-devtools",
+      "license": "Apache-2.0",
+      "modified": false
+    },
+    {
+      "name": "a11y-debugging",
+      "repository": "ChromeDevTools/chrome-devtools-mcp",
+      "commit": "cf98d8b88d74bfaa684412625fc89b58626919a5",
+      "path": "skills/a11y-debugging",
+      "installedPath": ".agents/skills/a11y-debugging",
+      "license": "Apache-2.0",
+      "modified": false
+    },
+    {
+      "name": "debug-optimize-lcp",
+      "repository": "ChromeDevTools/chrome-devtools-mcp",
+      "commit": "cf98d8b88d74bfaa684412625fc89b58626919a5",
+      "path": "skills/debug-optimize-lcp",
+      "installedPath": ".agents/skills/debug-optimize-lcp",
+      "license": "Apache-2.0",
+      "modified": false
+    }
+  ],
+  "mcp": [
+    {
+      "name": "playwright",
+      "package": "@playwright/mcp",
+      "version": "0.0.86",
+      "repository": "microsoft/playwright-mcp",
+      "commit": "2337aff0213d28db41d3e3daf48cee19b3d0bd82",
+      "status": "configuration-only; runtime not verified"
+    },
+    {
+      "name": "chrome-devtools",
+      "package": "chrome-devtools-mcp",
+      "version": "1.13.0",
+      "repository": "ChromeDevTools/chrome-devtools-mcp",
+      "commit": "cf98d8b88d74bfaa684412625fc89b58626919a5",
+      "status": "configuration-only; runtime not verified"
+    }
+  ],
+  "deferred": [
+    {
+      "repository": "huggingface/skills",
+      "commit": "5291c2b9365e06b175dc04817610c778623f4836",
+      "reason": "hf-cli/model/dataset workflows are optional for AI Bridge, not required for landing design"
+    }
+  ]
+}
