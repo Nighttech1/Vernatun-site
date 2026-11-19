@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "status": "planning",
+  "items": [
+    {
+      "id": "cover",
+      "kind": "image",
+      "placement": "after_lead",
+      "purpose": "Уточнить по теме",
+      "local_path": null,
+      "source_url": null,
+      "creator": null,
+      "rights": {
+        "status": "unverified",
+        "license": null,
+        "permission_reference": null
+      },
+      "alt": "Уточнить после выбора реального изображения",
+      "caption": null,
+      "width": null,
+      "height": null,
+      "ready": false
+    },
+    {
+      "id": "video-1",
+      "kind": "video",
+      "placement": "after_section_2",
+      "purpose": "Демонстрация конкретного действия",
+      "source_url": null,
+      "embed_url": null,
+      "poster": null,
+      "transcript": null,
+      "rights": {
+        "status": "unverified",
+        "permission_reference": null
+      },
+      "ready": false
+    }
+  ]
+}

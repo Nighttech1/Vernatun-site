@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "article_slug": "replace-with-unique-slug",
+  "article_version": null,
+  "approval": {
+    "status": "pending",
+    "approved_by": null,
+    "approved_at": null,
+    "evidence": null
+  },
+  "publication": {
+    "status": "not_published",
+    "canonical_url": null,
+    "live_verified_at": null
+  },
+  "telegram": {
+    "title": null,
+    "excerpt": null,
+    "url": null,
+    "cover": null
+  },
+  "delivery": {
+    "status": "blocked",
+    "idempotency_key": null,
+    "attempted_at": null,
+    "receipt": null
+  },
+  "notes": "Шаблон. Не отправлять до согласования конкретной версии и проверки опубликованной страницы. Адрес/механизм приёма агента бота пока не подтверждён."
+}
