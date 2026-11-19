@@ -19,6 +19,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 from urllib.request import urlopen
+from calendar_feed import CalendarFeedError, calendar_feed
 
 API_KEY = os.environ["LIVEKIT_API_KEY"]
 API_SECRET = os.environ["LIVEKIT_API_SECRET"]
@@ -2860,6 +2861,14 @@ class Handler(BaseHTTPRequestHandler):
         path = parsed.path.rstrip("/") or "/"
         qs = parse_qs(parsed.query)
 
+        if path == "/api/lounge/calendar":
+            try:
+                self._json(200, calendar_feed.get((qs.get("month") or [""])[0]))
+            except CalendarFeedError as error:
+                code = str(error)
+                self._json(400 if code == "invalid_month" else 503, {"ok": False, "error": code})
+            return
+
         if path == "/":
             self._json(200, {"ok": True, "service": "vernatun-lounge"})
             return
@@ -4347,3 +4356,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

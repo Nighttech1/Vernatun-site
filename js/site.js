@@ -404,154 +404,8 @@
     bindFilmHeader();
   }
 
-  var FORMAT_META = {
-    talk: {
-      kindLabel: 'Разговорный клуб',
-      pillLabel: 'Разговорный\nклуб',
-      title: 'Разговорный клуб',
-      image: '/images/event-talk.png',
-      description:
-        'Больше, чем разговорная практика. Это вечер глубоких диалогов, новых знакомств и живого языка, звучащего за общим столом.',
-    },
-    dance: {
-      kindLabel: 'Танцы',
-      pillLabel: 'Танцы',
-      title: 'Танцы',
-      image: '/images/event-dance.png?v=20260914c',
-      description:
-        'Движение, традиции и новые знакомства в комфортном темпе — без опыта, сцены и оценок. Учимся вместе в тёплой компании.',
-    },
-    volleyball: {
-      kindLabel: 'Волейбол',
-      pillLabel: 'Волейбол',
-      title: 'Волейбол',
-      image: '/images/event-volleyball.png',
-      description:
-        'Командный дух, азарт и активный отдых вне стен клуба. Играем в удовольствие независимо от уровня подготовки, общаемся и заряжаемся драйвом в кругу своих.',
-    },
-  };
-
   function padDateKey(y, m, d) {
-    var mm = String(m + 1).padStart(2, '0');
-    var dd = String(d).padStart(2, '0');
-    return y + '-' + mm + '-' + dd;
-  }
-
-  /** Saturdays from 2026-09-19: dance-only; +7 days: talk-only; then alternate. */
-  function saturdayKind(year, month, day) {
-    var cur = Date.UTC(year, month, day);
-    var start = Date.UTC(2026, 8, 19);
-    if (cur < start) return 'talk';
-    var days = Math.round((cur - start) / 86400000);
-    if (days % 14 === 0) return 'dance';
-    return 'talk';
-  }
-
-  /** One-off meetings outside the weekly pattern (date = YYYY-MM-DD). */
-  var EXTRA_EVENTS = [
-    { date: '2026-09-30', kind: 'talk', time: '20:00–23:00', idPrefix: 'talk-extra' },
-  ];
-
-  function buildMonthEvents(year, month) {
-    var list = [];
-    var daysInMonth = new Date(year, month + 1, 0).getDate();
-    var metaTalk = FORMAT_META.talk;
-    var metaDance = FORMAT_META.dance;
-    var metaVolley = FORMAT_META.volleyball;
-    for (var day = 1; day <= daysInMonth; day++) {
-      var dow = new Date(year, month, day).getDay();
-      var key = padDateKey(year, month, day);
-      if (dow === 4) {
-        list.push({
-          id: 'talk-thu-' + key,
-          date: key,
-          kind: 'talk',
-          kindLabel: metaTalk.kindLabel,
-          pillLabel: metaTalk.pillLabel,
-          title: metaTalk.title,
-          time: '20:00–23:00',
-          image: metaTalk.image,
-          description: metaTalk.description,
-        });
-      }
-      if (dow === 6) {
-        var sat = saturdayKind(year, month, day);
-        if (sat === 'talk') {
-          list.push({
-            id: 'talk-sat-' + key,
-            date: key,
-            kind: 'talk',
-            kindLabel: metaTalk.kindLabel,
-            pillLabel: metaTalk.pillLabel,
-            title: metaTalk.title,
-            time: '15:00–18:00',
-            image: metaTalk.image,
-            description: metaTalk.description,
-          });
-        } else {
-          list.push({
-            id: 'dance-' + key,
-            date: key,
-            kind: 'dance',
-            kindLabel: metaDance.kindLabel,
-            pillLabel: metaDance.pillLabel,
-            title: metaDance.title,
-            time: '18:00–20:00',
-            image: metaDance.image,
-            description: metaDance.description,
-          });
-        }
-      }
-      if (dow === 0) {
-        list.push({
-          id: 'volley-sun-' + key,
-          date: key,
-          kind: 'volleyball',
-          kindLabel: metaVolley.kindLabel,
-          pillLabel: metaVolley.pillLabel,
-          title: metaVolley.title,
-          time: '15:00–17:00',
-          image: metaVolley.image,
-          description: metaVolley.description,
-        });
-      }
-    }
-    EXTRA_EVENTS.forEach(function (extra) {
-      var parts = extra.date.split('-');
-      var ey = Number(parts[0]);
-      var em = Number(parts[1]) - 1;
-      if (ey !== year || em !== month) return;
-      var meta = FORMAT_META[extra.kind];
-      if (!meta) return;
-      var already = list.some(function (ev) {
-        return ev.date === extra.date && ev.kind === extra.kind && ev.time === extra.time;
-      });
-      if (already) return;
-      list.push({
-        id: (extra.idPrefix || extra.kind) + '-' + extra.date,
-        date: extra.date,
-        kind: extra.kind,
-        kindLabel: meta.kindLabel,
-        pillLabel: meta.pillLabel,
-        title: meta.title,
-        time: extra.time,
-        image: meta.image,
-        description: meta.description,
-      });
-    });
-    var monthNames = [
-      'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
-      'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря',
-    ];
-    list.forEach(function (ev) {
-      var parts = ev.date.split('-');
-      ev.dateLabel = Number(parts[2]) + ' ' + monthNames[Number(parts[1]) - 1];
-    });
-    list.sort(function (a, b) {
-      if (a.date !== b.date) return a.date < b.date ? -1 : 1;
-      return a.time.localeCompare(b.time, 'ru');
-    });
-    return list;
+    return y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
   }
 
   document.addEventListener('alpine:init', function () {
@@ -835,10 +689,11 @@
         'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
         'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',
       ];
-      var now = new Date();
-      var startYear = now.getFullYear();
-      var startMonth = now.getMonth();
-      var events = buildMonthEvents(startYear, startMonth);
+      var today = window.VernatunCalendar.moscowToday();
+      var now = new Date(today.year, today.month, today.day);
+      var startYear = today.year;
+      var startMonth = today.month;
+      var events = [];
       var byDate = {};
       function indexEvents(list) {
         byDate = {};
@@ -880,6 +735,22 @@
       return {
         year: startYear,
         month: startMonth,
+        loading: true,
+        error: '',
+        _requestSerial: 0,
+        _refreshTimer: null,
+        _abort: null,
+        init: function () {
+          this.reloadMonth();
+          var self = this;
+          this._refreshTimer = setInterval(function () {
+            if (!document.hidden && !self.loading) self.reloadMonth();
+          }, 60000);
+        },
+        destroy: function () {
+          if (this._refreshTimer) clearInterval(this._refreshTimer);
+          if (this._abort) this._abort.abort();
+        },
         monthNames: monthNames,
         weekDays: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
         events: events,
@@ -902,13 +773,43 @@
         rebuildGrid: function () {
           this.flatCells = buildFlatCells(this.year, this.month, this.selectedId);
         },
-        reloadMonth: function () {
-          this.events = buildMonthEvents(this.year, this.month);
-          indexEvents(this.events);
-          if (!this.events.some(function (ev) { return ev.id === this.selectedId; }, this)) {
-            this.selectedId = this.events.length ? this.events[0].id : null;
-          }
+        reloadMonth: async function () {
+          var currentToday = window.VernatunCalendar.moscowToday();
+          now = new Date(currentToday.year, currentToday.month, currentToday.day);
+          var serial = ++this._requestSerial;
+          var selected = this.selectedId;
+          if (this._abort) this._abort.abort();
+          var controller = new AbortController();
+          this._abort = controller;
+          var timeout = setTimeout(function () { controller.abort(); }, 12000);
+          this.loading = true;
+          this.error = '';
+          this.events = [];
+          this.selectedId = null;
+          indexEvents([]);
           this.rebuildGrid();
+          var monthKey = this.year + '-' + String(this.month + 1).padStart(2, '0');
+          try {
+            var response = await fetch('/api/lounge/calendar?month=' + monthKey, { cache: 'no-store', credentials: 'same-origin', signal: controller.signal });
+            if (!response.ok) throw new Error('calendar_unavailable');
+            var list = window.VernatunCalendar.normalizeEvents(await response.json());
+            if (serial !== this._requestSerial) return;
+            this.events = list.filter(function (event) { return event.date.slice(0, 7) === monthKey; });
+            indexEvents(this.events);
+            this.selectedId = this.events.some(function (event) { return event.id === selected; }) ? selected : (this.events.length ? this.events[0].id : null);
+          } catch (_) {
+            if (serial !== this._requestSerial) return;
+            this.events = [];
+            this.selectedId = null;
+            indexEvents([]);
+            this.error = 'Не удалось загрузить расписание. Попробуйте обновить его чуть позже.';
+          } finally {
+            clearTimeout(timeout);
+            if (serial === this._requestSerial) {
+              this.loading = false;
+              this.rebuildGrid();
+            }
+          }
         },
         selectId: function (id) {
           this.selectedId = id;
@@ -944,6 +845,7 @@
             /* pair of dancers like studio logo: left figure + right with skirt, arms up joining hands */
             return '<svg viewBox="0 0 48 44" fill="currentColor" aria-hidden="true"><circle cx="14.5" cy="6.5" r="3.2"/><path d="M14.5 10.2c-2.6.15-5.2-.9-7.1-2.9l-2 1.7c2.5 2.7 5.9 4.2 9.3 4.2.2 0 .3 0 .5-.02v.1c-2.1.55-3.7 2.1-4.3 4.2l-1 3.1h3.4l1.2-3.3 1.3 3.3h3.4l-1.4-3.8c-.55-1.5-1.8-2.6-3.3-2.95v-.15c.15 0 .3.02.45.02 3.1 0 6-1.35 8.1-3.7l-1.95-1.75c-1.65 1.8-3.9 2.8-6.15 2.95z"/><circle cx="33.5" cy="6.5" r="3.2"/><path d="M33.5 10.2c-2.2.1-4.3-.7-5.9-2.2l-1.9 1.7c2.1 2 4.8 3.15 7.6 3.25.15 0 .3 0 .45-.02v.12c-1.7.45-3 1.8-3.5 3.5l-1.15 3.35h12.2l-1.2-3.4c-.55-1.55-1.9-2.7-3.5-3.15v-.12c.12 0 .24.02.35.02 2.9 0 5.6-1.35 7.5-3.6l-1.95-1.7c-1.5 1.7-3.6 2.7-5.7 2.85z"/><path d="M28.2 19.2h10.6l2.6 6.4H25.6z"/><path d="M30.4 25.8l-2.4 10.4h3.3l1.5-6.2 1.4 6.2h3.3l-2.5-10.4z"/><path d="M12.2 20.4l-3.6 16h3.4l2.2-9.5 2.1 9.5h3.4l-3.7-16z"/></svg>';
           }
+          if (kind !== 'volleyball') return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 11h18M8 15h3M13 15h3"/></svg>';
           return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.2 5.2c2.2 2.4 3.4 5.4 3.4 8.8 0 2.2-.5 4.2-1.4 6"/><path d="M16.8 5.2c-2.2 2.4-3.4 5.4-3.4 8.8 0 2.2.5 4.2 1.4 6"/><path d="M4.2 10.2c2.6 1.1 5.2 1.7 7.8 1.7s5.2-.6 7.8-1.7"/><path d="M5.5 15.8c2.1-.8 4.3-1.2 6.5-1.2s4.4.4 6.5 1.2"/></svg>';
         },
         mobilePill: function (ev) {
@@ -1026,3 +928,4 @@
     });
   }
 })();
+
