@@ -63,3 +63,8 @@ Workflow: `.github/workflows/deploy.yml`.
 ## Legacy Spacedeck
 
 `liverooms/infra/spacedeck` сохранён как исходники с локальными изменениями (upstream: https://github.com/spacedeck/spacedeck-open, commit `a5914ab600e9f4ae3f42d9361195a3696843903e`). Лицензия сохранена. Рабочие базы и хранилище исключены. Текущий Кампус использует tldraw.
+
+## Команда разработки и качество
+
+Старт: [AGENTS.md](AGENTS.md). [Отчёт об усилении](docs/WEB_TEAM_READINESS.md), [следующие волны](docs/WEB_DEVELOPMENT_PLAN.md), [процедуры качества](docs/WEB_QUALITY_PLAYBOOK.md).
+Официальные skills включены в .agents/skills; происхождение и версии — plugins/web-team/sources.lock.json. Конфигурация MCP подготовлена отдельно от подтверждения её запуска.

@@ -1,0 +1,18 @@
+---
+description: Vernatun product profile, skill routing and evidence requirements
+globs: "**/*"
+alwaysApply: true
+---
+
+# Vernatun profile
+
+For this repository start with AGENTS.md, docs/WEB_TEAM_READINESS.md and docs/WEB_DEVELOPMENT_PLAN.md.
+Static site uses HTML/Alpine/Tailwind; Campus uses React/Vite/TypeScript; API is Python.
+Sputnik/Cortana/FinGrad and Flutter references in shared rules are historical templates, not this product's stack.
+Keep existing role boundaries, data protection and Client acceptance rules.
+For design/testing/a11y/LCP route to .agents/skills via AGENTS.md.
+Read docs/WEB_QUALITY_PLAYBOOK.md for asset, SEO, preview and evidence procedures.
+Brand palette and typography are product decisions: an external skill does not authorize replacing them.
+No universal networkidle for realtime pages. Wait for the relevant UI/API readiness condition.
+Do not invent MCP capabilities. .cursor/mcp.json was absent at audit; cards mentioning servers are not evidence they exist.
+Tooling-only changes go to a branch/PR: current main push automatically deploys production.
