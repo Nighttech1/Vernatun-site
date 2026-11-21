@@ -1,0 +1,20 @@
+{
+  "article_id": "VA26-001",
+  "version": "v01",
+  "status": "blocked_config",
+  "approval": "pending",
+  "send": false,
+  "text": "Как включить армянскую клавиатуру? Подготовили отдельные инструкции для iPhone, Android с Gboard, Windows и Mac: добавление языка, переключение обратно и проверка ввода. Руководство основано на официальной документации; тест на всех устройствах не проводился.",
+  "button": {
+    "text": "Открыть инструкцию",
+    "url": null
+  },
+  "planned_url": "https://vernatunspeakclub.com/articles/armyanskaya-klaviatura-na-telefone-i-kompyutere",
+  "requirements": [
+    "Одобрение точной версии",
+    "Публикация и проверка живой страницы",
+    "Подставить проверенный URL в кнопку",
+    "Подключённый подтверждённый обработчик бота",
+    "Защита от повторной отправки"
+  ]
+}

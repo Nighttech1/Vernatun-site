@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "article_id": "VA26-001",
+  "version": "v01",
+  "status": "review",
+  "created_at": "2026-11-21",
+  "research_status": "complete",
+  "checked_at": "2026-11-21",
+  "target_publication_date": "2026-11-21",
+  "published_at": null,
+  "title": "Как добавить армянскую клавиатуру на телефон и компьютер",
+  "slug": "armyanskaya-klaviatura-na-telefone-i-kompyutere",
+  "category": "Лайфхакер",
+  "tags": [
+    "Технологии",
+    "Армянский язык"
+  ],
+  "canonical": {
+    "planned_url": "https://vernatunspeakclub.com/articles/armyanskaya-klaviatura-na-telefone-i-kompyutere",
+    "published": false,
+    "review_robots": "noindex,nofollow"
+  },
+  "approval": {
+    "status": "pending",
+    "owner": "Alik",
+    "approved_version": null,
+    "approval_event": null
+  },
+  "design_reference": "editorial/articles/drafts/armyanskie-meropriyatiya-v-moskve/review-v01.html",
+  "lineage": {
+    "research_commit": "5623547cbb8d5212197e9029445b7551faa5548f",
+    "theme_changed": false,
+    "previous_article_version": null
+  },
+  "readiness": {
+    "text": "complete",
+    "media": "plan_only",
+    "device_tests": "not_performed",
+    "internal_links": "repository_confirmed_live_check_pending",
+    "publish": false,
+    "visual_review": "blocked_environment"
+  },
+  "blockers": [
+    "owner_approval",
+    "site_renderer_design_media_integration",
+    "live_internal_links_verification"
+  ],
+  "channels": {
+    "site": {
+      "status": "awaiting_approval",
+      "source": "channels/site.md"
+    },
+    "dzen": {
+      "status": "blocked_config",
+      "requires_verified_original_url": true,
+      "source": "channels/dzen.html"
+    },
+    "vc": {
+      "status": "blocked_config",
+      "requires_verified_original_url": true,
+      "source": "channels/vc.md"
+    },
+    "bot": {
+      "status": "blocked_config",
+      "source": "channels/bot.json"
+    }
+  },
+  "restrictions": [
+    "Не публиковать и не запускать деплой",
+    "Не отправлять внешним площадкам и боту",
+    "Не считать плановые медиа готовыми",
+    "Добавление медиа или фактов требует новой версии"
+  ],
+  "files": [
+    {
+      "path": "article.md",
+      "size_bytes": 14685,
+      "sha256": "feb4518d00590b86ffb22a18ef6602c8714faa0c6ccc0f2c0fb37375e6b4f853"
+    },
+    {
+      "path": "research.md",
+      "size_bytes": 27440,
+      "sha256": "b23e331f65009b84b9aef55e8dd6fcf4b64802a48b9f152cea642a03739c5630"
+    },
+    {
+      "path": "media.json",
+      "size_bytes": 5447,
+      "sha256": "915c78f2ce30f27ccbbb7045fc460e004ca07a301dee6a79a7569f901a465a1a"
+    },
+    {
+      "path": "review.html",
+      "size_bytes": 66218,
+      "sha256": "f8e566518c7555aa2421811c9f587b38c9b53aaf8d5147ed6ec14a1d8b9b7a48"
+    },
+    {
+      "path": "channels/site.md",
+      "size_bytes": 14685,
+      "sha256": "feb4518d00590b86ffb22a18ef6602c8714faa0c6ccc0f2c0fb37375e6b4f853"
+    },
+    {
+      "path": "channels/dzen.html",
+      "size_bytes": 16335,
+      "sha256": "d6987f2dbd6b87e773ad155e2e7f205ba7e6165388c3e271ae3c8411c72c0435"
+    },
+    {
+      "path": "channels/vc.md",
+      "size_bytes": 14210,
+      "sha256": "43f5c526b43f129ac9a27d6faddb47f2aa08f0e58a3987a3254e1ee16b889e3d"
+    },
+    {
+      "path": "channels/bot.json",
+      "size_bytes": 1154,
+      "sha256": "d1c5df36a4014e6e4787124127bdecf0c4eddfa29ee2effdd7efd959ca46fff5"
+    },
+    {
+      "path": "bot-handoff.json",
+      "size_bytes": 1154,
+      "sha256": "d1c5df36a4014e6e4787124127bdecf0c4eddfa29ee2effdd7efd959ca46fff5"
+    },
+    {
+      "path": "qa.md",
+      "size_bytes": 3206,
+      "sha256": "3ebec46c51752ba48e158bdf002855ad4c7e8e5206afd8d13c09d19461541c58"
+    }
+  ],
+  "bundle_sha256": "c79d0ac3abbe7abfe239e31bbd88325eca741e224c65349c6e77d4212cdef08b"
+}
